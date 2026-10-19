@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="description" content="Explore how 1,000 stochastic household decisions connect affordability and inequality with sanitation cost, coverage and environmental performance.">
+ <meta name="theme-color" content="#f7f8fa">
+ <meta property="og:title" content="Sanitation Affordability, Equity & Performance Explorer">
+ <meta property="og:description" content="A 1,000-household stochastic scenario tool for sanitation affordability, equity, coverage and environmental performance.">
+ <meta property="og:type" content="website">
+ <link rel="icon" href="favicon.svg" type="image/svg+xml">
+ <link rel="alternate icon" href="favicon.ico">
+<title>Sanitation Affordability, Equity & Performance Explorer</title>
+<meta name="description" content="Interactive sanitation affordability, equity and community impact explorer.">
+<rect width="64" height="64" rx="8" fill="%230b1720"/><path d="M20 45c7-5 9-12 12-28 4 16 6 23 13 28-4 7-8 10-13 10s-9-3-12-10z" fill="%2300b69f"/></svg>'>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ <div id="countryLoadingOverlay" class="country-loading-overlay" hidden aria-live="polite" aria-busy="true">
+ <div class="country-loading-card">
+ <div class="country-loading-spinner" aria-hidden="true"></div>
+ <div>
+ <strong id="countryLoadingTitle">Loading country data</strong>
+ <span id="countryLoadingDetail">Retrieving socioeconomic indicators…</span>
+ </div>
+ </div>
+ </div>
+
+<header>
+ <div class="header">
+ <div class="brand" id="brandHome" role="button" tabindex="0" title="Home">
+ <div>
+ <h1>Sanitation Affordability, Equity & Performance Explorer</h1><span class="site-brand-subtitle">Affordability · inequality · coverage · faecal-load reduction</span>
+ <p>Sanitation affordability, equity and faecal-load reduction</p>
+ </div>
+ </div>
+ <div class="header-tools">
+ <div class="top-select country-select-wrap scenario-header-control" title="Country">
+ <span id="countryFlag" class="flag">🇲🇼</span>
+ <select id="country" aria-label="Country">
+ <option value="MWI">Malawi</option>
+ </select>
+ </div>
+ <div class="top-select scenario-header-control" title="Currency">
+ <select id="currency" aria-label="Currency">
+ <option value="USD" selected>USD</option>
+ <option value="MWK">MWK</option>
+ </select>
+ </div>
+ <nav class="topnav">
+ <a href="#home" id="homeNav" class="page-nav active">Home</a>
+ <a href="#country" id="countryNav" class="page-nav">Explore map</a>
+ <a href="#strategy" id="strategyNav" class="page-nav">Strategy lab</a>
+ <a href="#global" id="globalNav" class="page-nav">Compare LDCs</a>
+ <a href="#method" class="country-only-nav">Method</a>
+ <a href="#evidence" class="country-only-nav">Evidence</a>
+ </nav>
+ </div>
+ </div>
+</header>
+
+<main class="landing page-view" id="landingPage">
+ <section class="landing-hero">
+ <div class="landing-copy">
+ <h2>Better sanitation is not only about better toilets.<br>It is also about who can afford them.</h2>
+ <p class="landing-lead">
+ This tool asks a simple question: <strong>which sanitation choices reach poorer households and keep the most faecal waste out of the environment?</strong>
+ </p>
+ <p>
+ Imagine 1,000 households. Each household has different resources and makes a discrete <strong>yes/no sanitation decision</strong> under the scenario.
+ A higher-performing toilet may control more waste for each household, but if it is too expensive,
+ many households may be left without one.
+ </p>
+ <p class="landing-micro-note">
+ Using household-level stochastic microsimulation matters because real households do not adopt “37% of a toilet”. Coverage emerges from 1,000 individual decisions, so affordability thresholds, inequality and targeting can produce nonlinear community outcomes.
+ </p>
+
+ <div class="landing-flow" aria-label="How the model works">
+ <div><strong>Household resources</strong><span>Families start with very different amounts they can mobilise</span></div>
+ <div><strong>Technology cost</strong><span>That changes each household’s probability of financial access</span></div>
+ <div><strong>Household decision</strong><span>Each of 1,000 households makes a reproducible yes/no decision</span></div>
+ <div><strong>Community coverage</strong><span>Coverage emerges from those individual household outcomes</span></div>
+ <div><strong>Environmental effect</strong><span>Coverage and technical performance determine how much faecal waste remains in the environment</span></div>
+ </div>
+
+ <div class="landing-actions">
+ <button id="enterModel" type="button">Open the scenario map</button>
+ <button id="enterGlobal" type="button" class="secondary">View LDC comparison</button>
+ </div>
+
+ <p class="landing-caveat">
+ This is a scenario model, not a forecast. It is designed to make the trade-offs between
+ <strong>cost, coverage, equity and faecal-load reduction</strong> easy to see
+ </p>
+ </div>
+
+ <aside class="landing-side">
+ <h3>Why this matters</h3>
+ <p>
+ Sanitation technologies are often compared one toilet at a time. But community impact also depends on
+ <strong>how many households can afford them</strong>, especially poorer households.
+ </p>
+
+ <div class="landing-questions">
+ <div>
+ <strong>Coverage</strong>
+ <span>How many households get a toilet?</span>
+ </div>
+ <div>
+ <strong>Equity</strong>
+ <span>Are poorer households reached too?</span>
+ </div>
+ <div>
+ <strong>Impact</strong>
+ <span>How much faecal waste is kept out of the environment?</span>
+ </div>
+ </div>
+
+ <p class="landing-small">
+ Change toilet costs, price support and affordability assumptions, then see how the result changes across the village.
+ </p>
+ </aside>
+ </section>
+</main>
+
+<div class="shell page-view" id="countryPage" hidden>
+ <div class="layout">
+
+ <aside class="sidebar">
+
+ <div class="block">
+ <h2>Affordability</h2>
+ <div class="wb">
+ <div><span>GNI per capita <button class="info-tip" type="button" data-help="Gross national income per person from the World Bank. The model uses it to set the overall scale of household resources.">i</button></span><strong id="gniVal">$600</strong></div>
+ <div><span>GDP per capita <button class="info-tip" type="button" data-help="Gross domestic product per person from the World Bank. Shown for context; the affordability distribution is primarily scaled from GNI per capita.">i</button></span><strong id="gdpVal">$670</strong></div>
+ <div><span>Gini inequality <button class="info-tip" type="button" data-help="A measure of inequality. Higher values mean resources are distributed more unevenly. The model uses Gini to spread household resources across poorer and richer households.">i</button></span><strong id="giniVal">38.5</strong></div>
+ </div>
+
+ <div id="countryStatus" class="status">Loading World Bank defaults…</div>
+
+ <div class="slider">
+ <div class="slider-head">
+ <label for="budgetShare">Upfront sanitation budget <button class="info-tip" type="button" data-help="The share of annual household resources treated as the household's upfront sanitation cash budget. The 5% default is an editable scenario assumption, not a JMP-derived value. A gradual transition is used around the threshold to avoid an unrealistic yes/no cliff.">i</button></label>
+ <span id="budgetShareOut">5.0%</span>
+ </div>
+ <input id="budgetShare" type="range" min="0.5" max="20" step="0.1" value="5">
+ <div class="note">Default 5% is an illustrative scenario assumption. Financial access changes gradually around the price threshold rather than as a hard yes/no cutoff.</div>
+ </div>
+
+ <div class="slider">
+ <div class="slider-head">
+ <label for="subsidy">Price support <button class="info-tip" type="button" data-help="A subsidy or other support that reduces the price paid by the household. A 20% price support means the household pays 80% of the listed toilet price.">i</button></label>
+ <span id="subsidyOut">0%</span>
+ </div>
+ <input id="subsidy" type="range" min="0" max="90" step="1" value="0">
+ </div>
+ </div>
+
+ <div class="block">
+ <h2>Sanitation choices</h2>
+ <div class="help">Each household is assumed to adopt the strongest option it can afford. Prices are editable scenario inputs.</div>
+ <div class="note">
+ Any household toilet is assumed to stop open defecation. <b>Faecal load kept out</b> is an editable scenario estimate of the share of faecal waste kept out of the human and wider environment across containment and downstream handling.
+ </div>
+ <div id="costSourceNote" class="note" style="margin-top:7px"></div>
+
+ <table class="options">
+ <thead>
+ <tr>
+ <th>Option</th>
+ <th id="costHead">Cost USD <button class="info-tip" type="button" data-help="Estimated upfront capital cost per household. Defaults use published country unit-cost benchmarks where available, but the values can be edited.">i</button></th>
+ <th>Faecal load kept out <button class="info-tip" type="button" data-help="Editable scenario estimate of the share of faecal waste kept out of the human and wider environment by the sanitation system. It is not a measured pathogen-risk percentage and does not follow automatically from cost.">i</button></th>
+ </tr>
+ </thead>
+ <tbody id="optionRows"></tbody>
+ </table>
+ </div>
+
+
+
+ </aside>
+
+ <main class="main">
+
+ <div id="message" class="message"></div>
+
+ <section class="stage">
+
+ <div class="map-col">
+ <div class="map-title">
+ <div>
+ <h2 id="basicMapTitle">Synthetic village map</h2>
+ <p id="basicMapDesc">Synthetic settlement pattern with sanitation status spatially shuffled</p>
+ </div>
+ <div class="map-title-tools">
+ <div id="mapMeta" class="map-meta">1,000 households <button class="info-tip" type="button" data-help="This is a household-level stochastic microsimulation. Each synthetic household has its own resources and a fixed pseudo-random access threshold, producing a discrete yes/no technology decision. The random draw is fixed so the same scenario is reproducible; it represents unobserved household heterogeneity, not measured behavioural uncertainty.">i</button></div>
+ <button id="openHouseholdData" class="text-action" type="button">View household data</button>
+ </div>
+ </div>
+
+ <div class="mapbox">
+ <svg id="villageMap" viewBox="0 0 1200 720" preserveAspectRatio="none">
+ <defs>
+ <pattern id="gridPattern" width="40" height="40" patternUnits="userSpaceOnUse">
+ <path d="M40 0 L0 0 0 40" fill="none" stroke="#dbe3e6" stroke-width=".45"/>
+ </pattern>
+ </defs>
+
+ <rect width="1200" height="720" fill="#eef2f3"/>
+ <rect width="1200" height="720" fill="url(#gridPattern)" opacity=".55"/>
+
+ <g id="parcelLayer"></g>
+ <g id="waterLayer"></g>
+ <g id="roadLayer"></g>
+ <g id="buildingLayer"></g>
+ </svg>
+
+ <div id="mapLegend" class="map-legend"></div>
+ <div class="map-scale">100 m</div>
+ <div class="map-badge">Synthetic layout · sanitation simulated</div>
+ </div>
+ </div>
+
+ <aside class="side-charts">
+<div id="overviewSidePanel" class="side-panel-view">
+
+ <div class="side-card">
+ <h3>Sanitation by wealth quintile <button class="info-tip" type="button" data-help="The 1,000 simulated households are ranked from poorest to richest and split into five equal groups of 200 households. Q1 is poorest; Q5 is richest.">i</button></h3>
+ <p>Each quintile contains 200 households</p>
+ <div class="quintile-finance-wrap">
+ <table class="quintile-finance" id="quintileFinanceTable">
+ <thead>
+ <tr>
+ <th>Quintile <button class="info-tip" type="button" data-help="Five equal groups of households ranked by modelled resources. Q1 is poorest and Q5 is richest.">i</button></th>
+ <th>HH resources <button class="info-tip" type="button" data-help="Median modelled annual household resources in the quintile. These are reconstructed from country GNI per capita and Gini inequality, not observed household survey incomes.">i</button></th>
+ <th>Cash budget <button class="info-tip" type="button" data-help="Median household resources multiplied by the selected upfront sanitation budget percentage. This is the cash the household can mobilise itself.">i</button></th>
+ <th>50% access price* <button class="info-tip" type="button" data-help="The listed price at which this scenario's financial-access response is 50% for this household after price support. Access changes gradually around this point rather than switching instantly.">i</button></th>
+ </tr>
+ </thead>
+ <tbody></tbody>
+ </table>
+ <div class="quintile-finance-note">*Listed price corresponding to the 50% financial-access point after current price support</div>
+ </div>
+ <svg id="sideEquity" class="dark-chart" viewBox="0 0 360 220"></svg>
+ <div id="sideEquityLegend" class="side-legend"></div>
+ </div>
+
+ <div class="side-card">
+ <h3>Faecal load entering the environment <button class="info-tip" type="button" data-help="This is the share of total modelled faecal wet mass that is not kept out of the environment by the current sanitation mix. Tonnes are an illustrative wet-faeces mass conversion, not a pathogen-risk estimate.">i</button></h3>
+ <p>This is the main environmental outcome in the tool. Lower is better</p>
+ <div class="impact-chart impact-chart-single">
+ <div class="impact-bar-row impact-bar-row-single">
+ <div class="impact-bar-head impact-bar-head-single">
+ <span class="metric-title">Still entering environment <button class="info-tip" type="button" data-help="Estimated annual wet faecal mass not kept out of the environment by the current sanitation mix. The conversion uses 128 g wet faeces per person per day from Rose et al. (2015).">i</button></span>
+ <strong id="loadRemaining">—</strong>
+ </div>
+ <div class="impact-track impact-track-large"><div id="impactRemainingFill" class="impact-fill impact-combined"></div></div>
+ </div>
+
+ <div class="impact-formula">
+ Demo conversion: 128 g wet faeces/person/day × 4.5 people/HH × 1,000 HH. Technical performance remains an editable scenario assumption.
+ </div>
+ </div>
+ </div>
+
+ </div>
+
+ </aside>
+ </section>
+
+ <section class="dashboard">
+
+ <div class="chartpanel">
+ <h3>Affordability distribution <button class="info-tip" type="button" data-help="Shows the modelled upfront sanitation budget from the poorest to richest household, compared with the effective price of each toilet option.">i</button></h3>
+ <p>An average can hide exclusion; the price lines now mark the midpoint of a gradual financial-access transition</p>
+ <svg id="affordChart" class="chart" viewBox="0 0 580 300"></svg>
+ </div>
+
+ <div class="chartpanel">
+ <h3>Why the cheapest or best-performing option may not remove the most faecal load <button class="info-tip" type="button" data-help="Coverage and technical performance are read from the left axis. The gold environmental-result line is read from the right axis in tonnes of faecal wet mass kept out per year. It is calculated from coverage × technical performance × total faecal load generated.">i</button></h3>
+ <p>Coverage and performance use the left axis. <strong>Faecal load kept out</strong> uses the right axis in tonnes/year, making the environmental optimum easier to see</p>
+ <svg id="tradeChart" class="chart" viewBox="0 0 580 300"></svg>
+ <div id="tradeLegend" class="legendline"></div>
+ </div>
+
+ </section>
+
+ <details class="technology-bubble-view">
+ <summary>
+ <span>
+ <strong>Technology view: coverage versus performance</strong>
+ <small>Keep the original bubble view for comparing the three sanitation options</small>
+ </span>
+ <span class="technology-bubble-toggle">Show chart</span>
+ </summary>
+ <div class="technology-bubble-body">
+ <div class="technology-bubble-copy">
+ <p>
+ Each bubble is one current sanitation option. Horizontal position shows modelled household coverage if that option were offered alone,
+ vertical position shows its editable technical performance, and bubble area shows the resulting annual faecal load kept out.
+ </p>
+ </div>
+ <svg id="tradeBubbleChart" class="chart" viewBox="0 0 760 330"></svg>
+ <div id="tradeBubbleLegend" class="legendline"></div>
+ </div>
+ </details>
+
+ <section class="drivers-section">
+ <div class="drivers-head">
+ <h2>What drives the result</h2>
+ <p>Two sensitivity views separate the effects of inequality, technology cost and faecal-load performance</p>
+ </div>
+
+ <div class="drivers-grid">
+ <div class="driver-panel">
+ <h3>Inequality changes what households can pay <button class="info-tip" type="button" data-help="This sensitivity test holds national income and the upfront sanitation budget share constant, then changes Gini. The lines show the median sanitation cash budget within the poorest, middle and richest quintiles.">i</button></h3>
+ <p>Holding average resources constant, a higher Gini shifts purchasing power away from poorer households</p>
+ <svg id="giniSensitivityChart" class="chart" viewBox="0 0 620 330"></svg>
+ <div class="legendline" id="giniSensitivityLegend"></div>
+ </div>
+
+ <div class="driver-panel">
+ <h3>Cost and faecal-load performance are different dimensions <button class="info-tip" type="button" data-help="Cost is converted to an index where the most expensive current option equals 100. Technical performance is the editable faecal-load-kept-out score. Comparing the two makes clear that higher cost does not automatically deliver a proportional environmental benefit.">i</button></h3>
+ <p>Technology cost is indexed to the most expensive option = 100 and compared with the editable faecal-load performance score</p>
+ <svg id="costContainmentChart" class="chart" viewBox="0 0 620 330"></svg>
+ <div class="legendline" id="costContainmentLegend"></div>
+ </div>
+ </div>
+ </section>
+
+ <div class="lower">
+
+ <section id="method">
+ <h2>Method</h2>
+ <p>The model is a structural scenario, not a forecast of future sanitation coverage or household behaviour. It is a reproducible stochastic microsimulation of 1,000 households representing financial access, discrete technology choice and technical faecal-load performance. Existing infrastructure, supply chains, land and tenure constraints, water availability, social preferences, regulation and programme delivery are not predicted. The full synthetic household-level dataset can be opened from the map.</p>
+
+ <div class="step">
+ <div class="n">1</div>
+ <div>
+ <h3>Represent inequality</h3>
+ <p>GNI per capita sets the scale. Gini shapes a stylised household-resource distribution.</p>
+ </div>
+ </div>
+
+ <div class="step">
+ <div class="n">2</div>
+ <div>
+ <h3>Estimate financial access to sanitation</h3>
+ <div class="formula">cash budget = annual household resources × selected upfront resource share</div>
+ <div class="formula">financial access = logistic(2.0 × ln(cash budget ÷ effective technology price))</div>
+ <p>
+ GNI per capita and Gini create a stylised monetary resource distribution. The default assumes 5% of annual resources can be mobilised upfront for sanitation, but this is explicitly editable.
+ A simple soft transition around the price threshold avoids the unrealistic assumption that two otherwise similar households switch instantly from 0% to 100% access.
+ These are transparent economic scenario assumptions. JMP inequality data are <strong>not</strong> used to fit them.
+ </p>
+ <p>
+ JMP wealth-quintile observations are kept outside the model and shown separately as an independent reality check on whether the resulting equity pattern resembles observed sanitation inequality.
+ </p>
+ </div>
+ </div>
+
+ <div class="step">
+ <div class="n">3</div>
+ <div>
+ <h3>Turn probabilities into household decisions</h3>
+ <div class="formula">household adopts an option if financial-access probability ≥ its fixed random threshold</div>
+ <p>
+ The model uses 1,000 synthetic households rather than applying one average adoption percentage to the whole population.
+ Each household receives a reproducible pseudo-random threshold and therefore makes a discrete yes/no decision for each scenario.
+ This means community coverage, technology mix and subsidy requirements emerge from individual household outcomes.
+ </p>
+ <p>
+ This stochastic microsimulation is useful around affordability thresholds: two households with similar resources need not always make the same realised choice, and small price or subsidy changes can shift some households but not others.
+ The random thresholds are fixed between runs so comparisons are reproducible. They represent unobserved heterogeneity, not a measured behavioural model or a confidence interval.
+ </p>
+ </div>
+ </div>
+
+ <div class="step">
+ <div class="n">4</div>
+ <div>
+ <h3>Separate access from technical performance</h3>
+ <div class="formula">A: any household toilet stops open defecation</div>
+ <div class="formula">B: faecal-load performance varies by technology</div>
+ <p>Cost is not used as a proxy for technical performance.</p>
+ </div>
+ </div>
+
+ <div class="step">
+ <div class="n">5</div>
+ <div>
+ <h3>Estimate faecal load kept out of the environment</h3>
+ <div class="formula">annual wet faecal mass = population × 128 g/person/day × 365</div>
+ <div class="formula">load kept out = Σ household faecal mass × technology performance</div>
+ <p>In Strategy Lab, the technical-performance sensitivity band applies a common plus/minus percentage-point range around the central technology assumptions while holding household choices fixed. It is a sensitivity test, not a confidence interval.</p>
+ <p>The 128 g/person/day conversion is the global median wet faecal mass reported by Rose et al. (2015). It is used only to translate the scenario into an intuitive annual mass. The technology performance percentages remain editable assumptions and are not pathogen-risk estimates.</p>
+ <p>The Strategy lab is intentionally simple. It tests only household support, market price/technical-performance assumptions and take-up. Market strengthening, local production or R&amp;D can be explored by changing technology prices directly rather than imposing a speculative relationship between programme spending and the resulting price reduction.</p>
+ </div>
+ </div>
+
+ <div class="step">
+ <div class="n">6</div>
+ <div>
+ <h3>Shuffle households across the village</h3>
+ <p>Wealth rank is assigned to building footprints through a fixed random permutation. When affordability changes, colours change across the village rather than from one side to the other.</p>
+ </div>
+ </div>
+ </section>
+
+ <section id="evidence">
+ <h2>Evidence</h2>
+ <p>The evidence supports the structure of the model, not one universal cost-performance curve. WHO emphasizes safety across the whole sanitation service chain, while affordability, subsidy design and financing affect who can obtain and use sanitation. The global comparison page adds an external plausibility check against WHO/UNICEF JMP 2024 sanitation estimates.</p>
+
+ <div class="evi">
+ <h3>Price affects uptake</h3>
+ <p>Randomised sanitation subsidies in Bangladesh increased hygienic latrine ownership and reduced open defecation.</p>
+ <a href="https://pubmed.ncbi.nlm.nih.gov/25883316/" target="_blank" rel="noopener">Science 2015</a>
+ </div>
+
+ <div class="evi">
+ <h3>Liquidity matters</h3>
+ <p>Finance substantially increased willingness to purchase sanitation in Cambodia.</p>
+ <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5669309/" target="_blank" rel="noopener">BenYishay et al.</a>
+ </div>
+
+ <div class="evi">
+ <h3>Coverage affects contamination</h3>
+ <p>Higher local latrine coverage in Bangladesh was associated with lower E. coli contamination.</p>
+ <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9489923/" target="_blank" rel="noopener">Contreras et al.</a>
+ </div>
+
+ <div class="evi">
+ <h3>Containment matters</h3>
+ <p>Environmental contamination in Accra differed sharply around clusters of contained sanitation.</p>
+ <a href="https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0199304" target="_blank" rel="noopener">Berendes et al.</a>
+ </div>
+
+ <div class="evi">
+ <h3>Averages can hide exclusion</h3>
+ <p>WHO and UNICEF recommend affordability analysis across poorer households, not only national averages.</p>
+ <a href="https://www.who.int/publications-detail-redirect/9789240023284" target="_blank" rel="noopener">WHO / UNICEF 2021</a>
+ </div>
+
+ <div class="evi">
+ <h3>Safety is a service-chain outcome</h3>
+ <p>WHO defines safe sanitation across toilet capture, containment, emptying, conveyance, treatment and final disposal or reuse. Capital cost alone is therefore not a measure of environmental performance.</p>
+ <a href="https://www.who.int/publications/i/item/9789241514705" target="_blank" rel="noopener">WHO sanitation guidelines</a>
+ </div>
+
+ <div class="evi">
+ <h3>Subsidy design affects equity</h3>
+ <p>World Bank evidence shows poorly designed water and sanitation subsidies often benefit richer households disproportionately, while targeted approaches can improve equity.</p>
+ <a href="https://www.worldbank.org/en/topic/water/publication/smarter-subsidies-for-water-supply-and-sanitation" target="_blank" rel="noopener">World Bank 2019</a>
+ </div>
+
+ <div class="evi">
+ <h3>Faecal mass conversion</h3>
+ <p>A literature review reported a global median wet faecal mass of 128 g per person per day. This model uses that only to express environmental-load scenarios in tonnes per year.</p>
+ <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4500995/" target="_blank" rel="noopener">Rose et al. 2015</a>
+ </div>
+ </section>
+
+ </div>
+
+ </main>
+ </div>
+</div>
+
+
+<div class="shell page-view strategy-page-shell" id="strategyPage" hidden>
+ <section class="strategy-page-head">
+ <div>
+ <span>Experimental</span>
+ <h2>Strategy lab</h2>
+ <p>Compare equity, public cost and faecal-load outcomes under alternative support strategies</p>
+ </div>
+ <div class="strategy-page-hint">Same 1,000-household stochastic microsimulation as the main model <button class="info-tip" type="button" data-help="Strategies operate on the same fixed synthetic households and their discrete decisions, which makes targeting, subsidy gaps and finite programme budgets behave at household level rather than as population averages.">i</button></div>
+ </section>
+
+ <section class="strategy-results-board">
+ <div class="strategy-load-result">
+ <div class="strategy-result-label">Faecal load kept out of the environment</div>
+ <div class="strategy-load-number">
+ <strong id="strategyFecalPct">—</strong>
+ <span id="strategyFecalTonnes">—</span>
+ </div>
+ <div class="strategy-big-track" aria-label="Faecal load kept out">
+ <div id="strategyFecalBar"></div>
+ </div>
+ <div id="strategyFecalRange" class="strategy-range-note">—</div>
+ <div class="strategy-top-metrics">
+ <div><span>Modelled toilet use</span><strong id="strategyCoverage">—</strong><small id="strategyCoverageDelta">—</small></div>
+ <div><span>Poorest 40% use</span><strong id="strategyPoor40">—</strong><small id="strategyPoor40Delta">—</small></div>
+ <div><span>Equity gap</span><strong id="strategyEquityGap">—</strong><small>Q5 − Q1 coverage</small></div>
+ <div><span>Public support used</span><strong id="strategySpent">—</strong><small id="strategyBudgetUse">—</small></div>
+ </div>
+ </div>
+
+ <div class="strategy-equity-result">
+ <div class="strategy-result-head">
+ <div><h3>Equity by wealth quintile</h3><p>Coverage from poorest (Q1) to richest (Q5). Marker shows the no-subsidy scenario</p></div>
+ <span id="strategyGiniBadge">Gini —</span>
+ </div>
+ <div id="strategyEquityBars" class="strategy-equity-bars"></div>
+ </div>
+
+ <div class="strategy-comparison-result">
+ <div class="strategy-result-head">
+ <div><h3>What does the same support envelope buy?</h3><p>Compare no household subsidy, a blanket subsidy and pro-poor targeting using the same technology assumptions</p></div>
+ </div>
+ <div id="strategyCompareRows" class="strategy-compare-rows"></div>
+ <details class="strategy-why-details">
+ <summary>Why the strategies differ</summary>
+ <div id="strategyWhyText" class="strategy-why"></div>
+ </details>
+ </div>
+
+ <details class="strategy-impact-details">
+ <summary>
+ <span><strong>Impact detail</strong> · access extension, upgrading, spending anatomy and policy frontier</span>
+ <span>Expand</span>
+ </summary>
+ <div class="strategy-insight-grid">
+ <section class="strategy-decomposition-result">
+ <div class="strategy-result-head">
+ <div><h3>Where does the gain come from?</h3><p>Selected strategy compared with no household subsidy. Access extension and service upgrading are shown separately</p></div>
+ </div>
+ <div id="strategyOutcomeBreakdown" class="strategy-outcome-breakdown"></div>
+ <div class="strategy-spending-head"><span>Public spending anatomy</span><small>Blanket support can include genuine leakage as well as support that enables upgrades</small></div>
+ <div id="strategySpendingBreakdown" class="strategy-spending-breakdown"></div>
+ </section>
+
+ <section class="strategy-frontier-result">
+ <div class="strategy-result-head">
+ <div><h3>Policy frontier</h3><p>Equity versus environmental performance. Bubble size shows public spending; vertical whiskers show technical-performance sensitivity</p></div>
+ </div>
+ <svg id="strategyFrontier" viewBox="0 0 640 360"></svg>
+ <div class="strategy-frontier-note">No single score is imposed: a strategy can reach more poorer households while another produces more environmental gain</div>
+ </section>
+ </div>
+ </details>
+ </section>
+
+ <section class="strategy-workspace">
+ <aside class="strategy-page-panel">
+ <div id="strategySidePanel" class="side-panel-view strategy-side">
+ <div class="strategy-compact-head">
+ <div><h3>Strategy controls</h3><p>Only the assumptions needed to test the core trade-offs</p></div>
+ <button id="strategyReset" type="button" class="strategy-icon-btn" title="Reset strategy">↺</button>
+ </div>
+
+ <section class="strategy-simple-block">
+ <h4>1. Household support</h4>
+ <div class="strategy-choice-row" id="strategyMechanismButtons">
+ <button type="button" data-mechanism="none">None</button>
+ <button type="button" data-mechanism="blanket">Blanket</button>
+ <button type="button" data-mechanism="targeted" class="active">Pro-poor</button>
+ </div>
+ <div id="strategySupportWrap" class="strategy-simple-slider">
+ <div><span>Maximum subsidy per household</span><strong id="strategySupportOut">30%</strong></div>
+ <input id="strategySupport" type="range" min="0" max="80" step="5" value="30">
+ </div>
+ <div id="strategyEnvelopeWrap" class="strategy-simple-slider">
+ <div><span>Programme envelope</span><strong id="strategyEnvelopeOut">—</strong></div>
+ <input id="strategyEnvelope" type="range" min="0" max="150000" step="1000" value="45000">
+ </div>
+ <p id="strategyEnvelopeNote" class="strategy-simple-note"></p>
+ <p id="strategySupportNote" class="strategy-simple-note"></p>
+ </section>
+
+ <section class="strategy-simple-block">
+ <h4>2. Technology assumptions</h4>
+ <p class="strategy-simple-note">Price and faecal-load performance are independent. A more expensive toilet is not assumed to perform proportionally better</p>
+ <div id="strategyTechRows" class="strategy-tech-rows"></div>
+ <div class="strategy-simple-slider strategy-uncertainty-control">
+ <div><span>Technical-performance sensitivity <button class="info-tip" type="button" data-help="Applies the same plus/minus percentage-point band around each option's central faecal-load-performance assumption. It changes the environmental result only; household choices are held fixed. This is a scenario sensitivity range, not a statistical confidence interval.">i</button></span><strong id="strategyUncertaintyOut">±10 pp</strong></div>
+ <input id="strategyUncertainty" type="range" min="0" max="30" step="1" value="10">
+ </div>
+ <p class="strategy-simple-note">Low and high values shown beside each technology are a sensitivity band around the central assumption, not evidence-derived confidence limits</p>
+ </section>
+
+ <section class="strategy-simple-block">
+ <h4>3. Demand</h4>
+ <div class="strategy-simple-slider">
+ <div><span>Expected take-up after financial access <button class="info-tip" type="button" data-help="Experimental demand assumption applied after the financial-access step. It can represent health communication, social mobilisation, privacy, convenience and product appeal without trying to model those channels separately.">i</button></span><strong id="strategyTakeupOut">100%</strong></div>
+ <input id="strategyTakeup" type="range" min="70" max="100" step="1" value="100">
+ </div>
+ </section>
+
+ <div class="strategy-simple-footer">
+ <span id="strategyPopulation">—</span>
+ <span>Gini <strong id="strategyGini">—</strong></span>
+ <span>No-subsidy load reduction <strong id="strategyBaselineFecal">—</strong></span>
+ </div>
+ </div>
+ </aside>
+
+ <div class="map-col strategy-map-col">
+ <div class="map-title">
+ <div><h2>Household result</h2><p>The map shows which sanitation option each synthetic household adopts under the selected strategy</p></div>
+ <div class="map-title-tools"><div id="strategyMapMeta" class="map-meta">1,000 households</div></div>
+ </div>
+ <div class="mapbox">
+ <svg id="strategyVillageMap" viewBox="0 0 1200 720" preserveAspectRatio="none">
+ <defs><pattern id="strategyGridPattern" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0 L0 0 0 40" fill="none" stroke="#dbe3e6" stroke-width=".45"/></pattern></defs>
+ <rect width="1200" height="720" fill="#eef2f3"/>
+ <rect width="1200" height="720" fill="url(#strategyGridPattern)" opacity=".55"/>
+ <g id="strategyParcelLayer"></g><g id="strategyWaterLayer"></g><g id="strategyRoadLayer"></g><g id="strategyBuildingLayer"></g>
+ </svg>
+ <div id="strategyMapLegend" class="map-legend"></div>
+ <div class="map-scale">100 m</div>
+ <div class="map-badge">Synthetic layout · strategy simulated</div>
+ </div>
+ </div>
+ </section>
+</div>
+
+<div class="shell page-view global-page" id="globalPage" hidden>
+ <section class="global-head">
+ <div>
+ <h2>LDC financial-access test against JMP sanitation estimates <button class="source-tip info-tip" type="button" data-help="Country scope: current UN Least Developed Countries from the UN Statistics Division M49 grouping. Sanitation unit costs: Hutton & Varughese, World Bank (2016), Appendix E. GNI and Gini: World Development Indicators. National sanitation outcomes: WHO/UNICEF JMP indicators distributed through WDI. JMP inequality workbooks are used separately as an independent equity benchmark.">Source</button></h2>
+ <p>This page compares sanitation financial-access estimates based on published country-specific unit costs with JMP 2024 sanitation coverage across the current UN Least Developed Countries</p>
+ </div>
+
+ <div class="global-controls">
+ <label>
+ Comparison
+ <select id="globalMetric">
+ <option value="basic" selected>Improved pit financial access vs JMP at least basic sanitation</option>
+ <option value="nonod">Traditional pit financial access vs JMP population not practising open defecation</option>
+ </select>
+ </label>
+ <label>
+ Find LDC
+ <input id="globalSearch" type="search" placeholder="Search…">
+ </label>
+ <div class="global-actions">
+ 
+ 
+ </div>
+ </div>
+
+ <div id="globalStatus" class="global-status">The UN LDC list and World Bank country cost benchmarks are embedded. Current WDI/JMP indicators load only for the LDCs.</div>
+ </section>
+
+ <section class="metric-summary-wrap">
+ <table class="metric-summary" id="metricSummary">
+ <thead>
+ <tr>
+ <th>Diagnostic comparison</th>
+ <th>LDCs paired</th>
+ <th>Pearson r</th>
+ <th>R²</th>
+ <th>Mean absolute gap</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr><td colspan="5">Open this page to load the current indicators.</td></tr>
+ </tbody>
+ </table>
+ </section>
+
+ <section class="global-grid">
+ <div class="global-panel">
+ <h3 id="globalScatterTitle">Modelled improved-pit financial access vs JMP at least basic sanitation <button class="source-tip info-tip" type="button" data-help="Modelled x-axis: World Bank 2015 sanitation unit costs, converted to 2024 USD, combined with WDI GNI/Gini. Observed y-axis: WHO/UNICEF JMP 2024 sanitation indicator SH.STA.BASS.ZS, retrieved through WDI. This chart does not use the JMP inequality workbooks.">Source</button></h3>
+ <p id="globalScatterNote">Improved-pit cost is a proxy formed from published rural wet-pit and dry-pit estimates; the dashed line shows 1:1 agreement</p>
+ <svg id="globalScatter" class="global-chart" viewBox="0 0 760 520"></svg>
+ <div id="globalScatterLegend" class="global-legend"></div>
+ </div>
+
+ <aside class="review-panel">
+ <h3>Data and interpretation</h3>
+ <p><strong>Sanitation costs.</strong> Country unit costs come from Hutton &amp; Varughese's World Bank sanitation costing study, which compiled country cost evidence and extrapolated costs for 140 low- and middle-income countries.</p>
+ <p><strong>Country scope.</strong> The analysis covers the current UN Least Developed Countries, where household financial access remains especially relevant to sanitation access.</p>
+ <p><strong>Financial-access model.</strong> Published sanitation capital costs are combined with GNI per capita and Gini to create a stylised monetary resource distribution. The affordability share and soft transition are scenario assumptions. JMP inequality data do not affect the model calculation.</p>
+
+ <h3>Cost mapping used</h3>
+ <ul>
+ <li><strong>Traditional pit:</strong> World Bank 2015 rural unimproved-pit capital cost per person.</li>
+ <li><strong>Improved pit:</strong> mean of the published rural wet-pit and dry-pit capital costs, used as a broad basic-improved-pit proxy.</li>
+ <li><strong>Septic:</strong> published latrine-with-septic-tank cost, shown in the table for context but not treated as equivalent to safely managed sanitation.</li>
+ <li>2015 US-dollar costs are converted to 2024 dollars using the US CPI ratio 143.86 / 108.7 = <strong>1.323</strong>.</li>
+ </ul>
+
+ <h3>Remaining limitations</h3>
+ <ul>
+ <li>Published unit costs are estimates, and some source data are old. They should be treated as indicative country benchmarks rather than current market quotations.</li>
+ <li>GNI per capita and Gini are used to reconstruct a stylised resource distribution. Missing Gini values use the median of the LDCs with data and are flagged.</li>
+ <li>The affordability calculation is expressed per person, avoiding the need to assume one household size across all LDCs.</li>
+ <li>Financial access is not the only determinant of sanitation uptake. Supply chains, tenure, norms, public investment, urbanisation and policy matter.</li>
+ <li>Correlation with JMP does not establish causation. Income and sanitation access share many underlying determinants.</li>
+ </ul>
+
+ <p class="source-note"><strong>National comparison sources.</strong> LDC membership: UN Statistics Division M49. Sanitation unit costs: World Bank, Hutton &amp; Varughese (2016), Appendix E. GNI/Gini and national JMP 2024 sanitation indicators: World Development Indicators.</p>
+ <p class="source-note">
+ <strong>Independent JMP inequality benchmark.</strong> Country inequality workbooks from WHO/UNICEF JMP provide observed sanitation outcomes by survey wealth quintile from re-analysed household surveys such as DHS and MICS. They do not determine the model's resource distribution, affordability share, technology costs or technical performance. They are shown alongside the economic model as an independent reality check. The embedded benchmark contains 380 observed quintile outcomes. Six basic-sanitation series were reconstructed from the mutually exclusive JMP sanitation ladder after the initial extraction selected an inconsistent row; Comoros was excluded because its extracted ladder remained internally inconsistent.
+ </p>
+ </aside>
+ </section>
+
+ <section class="diagnostic-panel">
+ <div class="diagnostic-head">
+ <div>
+ <h3>Does the financial-access model add useful signal?</h3>
+ <p>Use several diagnostics together; correlation alone is not enough</p>
+ </div>
+ <div id="diagnosticVerdict" class="diagnostic-verdict"></div>
+ </div>
+
+ <div class="diagnostic-grid">
+ <div>
+ <span>Linear association</span>
+ <strong id="diagPearson">—</strong>
+ <small>Pearson r</small>
+ </div>
+ <div>
+ <span>Rank association</span>
+ <strong id="diagSpearman">—</strong>
+ <small>Spearman ρ</small>
+ </div>
+ <div>
+ <span>Typical error</span>
+ <strong id="diagMae">—</strong>
+ <small>Mean absolute error</small>
+ </div>
+ <div>
+ <span>Systematic bias</span>
+ <strong id="diagBias">—</strong>
+ <small>Median model − JMP</small>
+ </div>
+ <div>
+ <span>Reasonably close</span>
+ <strong id="diagWithin10">—</strong>
+ <small>Countries within ±10 pp</small>
+ </div>
+ <div>
+ <span>Income-only benchmark</span>
+ <strong id="diagIncomeR">—</strong>
+ <small>log GNI vs JMP, Pearson r</small>
+ </div>
+ <div>
+ <span>Signal beyond income</span>
+ <strong id="diagPartial">—</strong>
+ <small>Partial r controlling log GNI</small>
+ </div>
+ </div>
+
+ <div id="diagnosticText" class="diagnostic-text"></div>
+ </section>
+
+ <section class="global-views">
+ <div class="global-views-head">
+ <h3>Additional views of financial access, equity and technology cost</h3>
+ <p>These use the same selected traditional-pit or improved-pit financial-access comparison as the main scatter plot</p>
+ </div>
+ <div class="global-view-grid">
+ <div class="global-view-panel global-view-wide">
+ <h3>Financial-access gap by country <button class="source-tip info-tip" type="button" data-help="Modelled view only. Inputs are World Bank sanitation unit costs plus WDI GNI per capita and Gini. The poorest-20% and all-population values are synthetic financial-access estimates, not JMP observations.">Source</button></h3>
+ <p>Poorest 20% versus all households; the connecting line shows the financial-access gap and countries are ranked by its size</p>
+ <div id="equityGapStatus" class="chart-status"></div>
+ <svg id="equityScatter" class="global-chart" viewBox="0 0 920 1100"></svg>
+ <div class="equity-gap-legend">
+ <span><i class="poor-dot"></i>Poorest 20%</span>
+ <span><i class="all-dot"></i>All households</span>
+ </div>
+ </div>
+ <div class="global-view-panel">
+ <h3>Cost burden versus observed access <button class="source-tip info-tip" type="button" data-help="Cost burden uses World Bank sanitation unit costs divided by WDI GNI per capita. Observed sanitation access is the selected WHO/UNICEF JMP 2024 national indicator retrieved through WDI.">Source</button></h3>
+ <p>Published technology cost as a share of GNI per capita versus the selected JMP sanitation indicator; the cost-burden axis is logarithmic</p>
+ <svg id="costAccessScatter" class="global-chart" viewBox="0 0 620 400"></svg>
+ </div>
+ <div class="global-view-panel global-view-wide">
+ <h3>Technology cost distribution across LDCs <button class="source-tip info-tip" type="button" data-help="World Bank sanitation unit costs from Hutton & Varughese (2016), Appendix E. Published 2015 US$/person values are converted to 2024 USD using the fixed US CPI ratio used throughout this tool.">Source</button></h3>
+ <p>Published 2024-equivalent capital cost per person; box = interquartile range, centre line = median, whiskers = minimum and maximum</p>
+ <svg id="technologyCostChart" class="global-chart" viewBox="0 0 920 310"></svg>
+ </div>
+ </div>
+ </section>
+
+ <section class="ldc-mix-section">
+ <div class="jmp-ineq-strip">
+ <div>
+ <h3>Compare the economic scenario with observed JMP inequality data <button class="source-tip info-tip" type="button" data-help="Observed Q1–Q5 sanitation outcomes come from WHO/UNICEF JMP country inequality workbooks, based on re-analysis of household surveys such as DHS and MICS. They are kept outside the economic model and used only as an observed equity benchmark.">Source</button></h3>
+ <p>
+ JMP inequality data have one specific role here: they provide an <strong>independent observed Q1–Q5 benchmark</strong>.
+ They do not set the model's household resources, affordability assumptions, technology shares, sanitation costs, technical performance or faecal-load assumptions.
+ </p>
+ </div>
+ <div class="jmp-ineq-actions">
+ <a id="jmpIneqCountryLink" href="https://washdata.org/data/country/MWI/inequalities/download" target="_blank" rel="noopener">Malawi JMP inequalities</a>
+ <a href="https://washdata.org/data/downloads#WLD" target="_blank" rel="noopener">JMP downloads index</a>
+ </div>
+ <div id="jmpIneqCoverage" class="jmp-ineq-coverage"></div>
+ </div>
+
+ <div class="jmp-use-box">
+ <div class="jmp-use-title">
+ <strong>How JMP inequality data are used in this tool</strong>
+ <button class="source-tip info-tip" type="button" data-help="Source: WHO/UNICEF JMP country inequality workbooks. The workbooks provide sanitation outcomes by survey wealth quintile from re-analysed household surveys.">Source</button>
+ </div>
+ <div class="jmp-use-grid">
+ <div><b>1 · Build the economic scenario</b><span>GNI + Gini create a synthetic monetary resource distribution. Sanitation costs then determine modelled financial access.</span></div>
+ <div><b>2 · Keep JMP outside the model</b><span>JMP Q1–Q5 observations are not used to fit household resources, the 5% budget assumption, technology choice or technical performance.</span></div>
+ <div><b>3 · Compare with observed inequality</b><span>For the benchmark only, income, Gini and costs are aligned to the JMP survey period and the model is compared with the observed Q1–Q5 sanitation pattern.</span></div>
+ <div><b>4 · Learn from the gap</b><span>If modelled financial access differs from observed sanitation, that highlights the importance of supply, tenure, behaviour, public investment and other non-price factors.</span></div>
+ </div>
+ <p class="jmp-use-foot">
+ At the default 5% scenario assumption, the independent 380-point benchmark has MAE <strong>23.3 pp</strong> and Pearson r <strong>0.67</strong>. These statistics describe the comparison; they were not used to select the model parameters.
+ The main LDC scatter separately uses <strong>national JMP 2024 estimates</strong>.
+ </p>
+ </div>
+
+ <details class="jmp-validation-details">
+ <summary>
+ <span><strong>Independent JMP equity benchmark</strong> · 380 observed wealth-quintile outcomes</span>
+ <span>Default scenario: MAE 23.3 pp · r 0.67</span>
+ </summary>
+ <div class="jmp-validation-panel">
+ <div class="jmp-validation-head">
+ <div>
+ <h3>Observed JMP equity versus the economic scenario <button class="source-tip info-tip" type="button" data-help="Observed series: JMP inequality workbooks. Economic comparison: survey-year GNI (GDP fallback), nearest available Gini, World Bank sanitation costs converted to the survey year, a 5% upfront resource-share assumption and a fixed soft transition. JMP observations do not fit these assumptions.">Source</button></h3>
+ <p>
+ Each observed JMP quintile series is compared with an independently specified economic scenario using income from the survey period, the nearest available Gini and sanitation costs converted to the survey year.
+ The default 5% upfront resource share and fixed soft transition are not estimated from JMP. The purpose is to see where a simple affordability model resembles observed inequality and where it does not.
+ </p>
+ </div>
+ <div class="jmp-validation-controls">
+ <label>Country<select id="validationCountry"></select></label>
+ <label>Outcome
+ <select id="validationMetric">
+ <option value="basic">Basic sanitation</option>
+ <option value="not_od">Not practising open defecation</option>
+ </select>
+ </label>
+ </div>
+ </div>
+
+ <div class="jmp-validation-grid">
+ <div class="jmp-validation-chart">
+ <div class="jmp-validation-legend">
+ <span><i class="obs-dot"></i>JMP observed</span>
+ <span><i class="model-square"></i>Economic scenario</span>
+ </div>
+ <svg id="validationQuintileChart" viewBox="0 0 720 330"></svg>
+ </div>
+
+ <div class="jmp-validation-stats">
+ <div><span>Survey</span><strong id="validationSurvey">—</strong></div>
+ <div><span>Country MAE</span><strong id="validationCountryMae">—</strong></div>
+ <div><span>Observed Q5−Q1</span><strong id="validationObservedGap">—</strong></div>
+ <div><span>Model Q5−Q1</span><strong id="validationModelGap">—</strong></div>
+ <div><span>All-outcome MAE</span><strong id="validationPooledMae">—</strong></div>
+ <div><span>Pearson r</span><strong id="validationCvMae">—</strong></div>
+ <div class="jmp-validation-stat-wide">
+ <span>Interpretation</span>
+ <p id="validationInterpretation">—</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ </details>
+
+ <div class="ldc-mix-head">
+ <div>
+ <h3>Theoretical sanitation mix from modelled financial access <button class="source-tip info-tip" type="button" data-help="This is a model output, not an observed JMP technology mix. Inputs are World Bank sanitation costs, WDI GNI/Gini and the current economic scenario assumptions. JMP inequality data do not affect this calculation.">Source</button></h3>
+ <p>
+ A stylised allocation using the same GNI, Gini, financial-access assumption and published country unit costs.
+ Each simulated person takes the strongest option crossing its scenario financial-access threshold: septic → improved pit → traditional pit → no toilet.
+ This is a theoretical financial-access scenario, not observed JMP technology use.
+ </p>
+ </div>
+ <div id="ldcMixSummary" class="ldc-mix-summary"></div>
+ </div>
+
+ <div class="ldc-mix-grid">
+ <div class="ldc-mix-panel ldc-mix-wide">
+ <h3>Modelled technology mix by LDC <button class="source-tip info-tip" type="button" data-help="Modelled only. World Bank sanitation costs + WDI GNI/Gini + the current economic scenario assumptions. JMP inequality data do not affect the technology mix.">Source</button></h3>
+ <p>100% stacked rows; countries are ranked by the modelled share not realising even a traditional pit</p>
+ <div class="ldc-mix-legend">
+ <span><i class="mix-none"></i>No toilet / OD</span>
+ <span><i class="mix-traditional"></i>Traditional pit</span>
+ <span><i class="mix-improved"></i>Improved pit</span>
+ <span><i class="mix-septic"></i>Septic</span>
+ </div>
+ <div class="ldc-mix-chart-scroll">
+ <svg id="ldcMixChart" class="global-chart ldc-mix-chart" viewBox="0 0 920 1100"></svg>
+ </div>
+ </div>
+
+ <div class="ldc-mix-panel">
+ <h3>How the mix changes by wealth quintile <button class="source-tip info-tip" type="button" data-help="Synthetic wealth quintiles reconstructed from GNI and Gini. These are not the same households as the JMP survey wealth quintiles. JMP inequality data are shown separately as an independent benchmark.">Source</button></h3>
+ <p>
+ Equal-weighted average across the LDCs shown. Q1 is the poorest 20%; Q5 is the richest 20%.
+ This makes the modelled equity gradient visible across technology types, not only access/no-access.
+ </p>
+ <div class="ldc-mix-legend">
+ <span><i class="mix-none"></i>No toilet / OD</span>
+ <span><i class="mix-traditional"></i>Traditional</span>
+ <span><i class="mix-improved"></i>Improved</span>
+ <span><i class="mix-septic"></i>Septic</span>
+ </div>
+ <svg id="ldcEquityMixChart" class="global-chart" viewBox="0 0 620 360"></svg>
+ <div id="ldcEquityMixNote" class="ldc-equity-note"></div>
+ <div id="ldcJmpObservedHint" class="ldc-jmp-observed-hint"></div>
+ </div>
+ </div>
+ </section>
+
+ <section class="country-table-wrap">
+ <div class="table-head">
+ <div>
+ <h3>LDC comparison</h3>
+ <p id="globalTableNote">Costs are 2024 US$/person; * indicates an imputed LDC-median Gini; click any column heading to sort</p>
+ </div>
+ <div class="table-tools">
+ <div id="globalStats" class="inline-stats"></div>
+ 
+ </div>
+ </div>
+
+ <div class="country-table-scroll">
+ <table class="country-table" id="countryComparisonTable">
+ <thead>
+ <tr>
+ <th class="sortable" data-sort="country" data-label="Country">Country</th>
+ <th class="sortable" data-sort="gni" data-label="GNI / capita">GNI / capita <button class="info-tip" type="button" data-help="Latest available GNI per capita from World Development Indicators (NY.GNP.PCAP.CD), used to scale the modelled resource distribution.">i</button></th>
+ <th class="sortable" data-sort="gini" data-label="Gini">Gini <button class="info-tip" type="button" data-help="World Development Indicators Gini index (SI.POV.GINI), used to shape the modelled resource distribution. An asterisk indicates an imputed LDC-median value.">i</button></th>
+ <th class="sortable" data-sort="traditional" data-label="Traditional pit">Traditional pit <button class="source-tip info-tip" type="button" data-help="World Bank, Hutton & Varughese (2016), Appendix E: 2015 rural unimproved-pit capital cost per person, converted to 2024 USD.">Source</button></th>
+ <th class="sortable" data-sort="improved" data-label="Improved pit proxy">Improved pit proxy <button class="source-tip info-tip" type="button" data-help="World Bank, Hutton & Varughese (2016), Appendix E. Proxy = mean of published rural wet-pit and dry-pit capital costs, converted from 2015 to 2024 USD.">Source</button></th>
+ <th class="sortable" data-sort="septic" data-label="Septic">Septic <button class="source-tip info-tip" type="button" data-help="World Bank, Hutton & Varughese (2016), Appendix E: latrine-with-septic-tank capital cost per person, converted from 2015 to 2024 USD. It is not treated as equivalent to safely managed sanitation.">Source</button></th>
+ <th class="sortable" data-sort="model" data-label="Model">Model <button class="info-tip" type="button" data-help="Share of the modelled population with financial access to the selected sanitation technology under the current economic scenario assumptions.">i</button></th>
+ <th class="sortable" data-sort="jmp" data-label="JMP 2024">JMP 2024 <button class="info-tip" type="button" data-help="WHO/UNICEF JMP national sanitation estimate for the selected comparison, retrieved through World Development Indicators (SH.STA.BASS.ZS or SH.STA.ODFC.ZS). This is separate from the JMP inequality-workbook data used as an independent equity benchmark.">i</button></th>
+ <th class="sortable" data-sort="gap" data-label="Gap">Gap <button class="info-tip" type="button" data-help="Modelled financial-access coverage minus the corresponding JMP estimate, in percentage points.">i</button></th>
+ <th>JMP equity <button class="source-tip info-tip" type="button" data-help="Direct country inequality workbook from WHO/UNICEF JMP where available. These survey-based wealth quintiles are shown as an independent observed benchmark and are not model inputs.">Source</button></th>
+ </tr>
+ </thead>
+ <tbody><tr><td colspan="10">Open this page to load current WDI/JMP indicators.</td></tr></tbody>
+ </table>
+ </div>
+ </section>
+
+ <section class="global-method-note">
+ <h3>What this analysis tests</h3>
+ <p>The analysis tests whether differences in sanitation costs, household resources and inequality are associated with observed JMP sanitation access across LDCs. The embedded wealth-quintile validation separately tests whether the simple financial-access model reproduces observed equity gradients. Neither comparison is treated as a forecast.</p>
+ </section>
+</div>
+
+
+<div id="householdDataModal" class="hh-modal" hidden>
+ <div class="hh-dialog" role="dialog" aria-modal="true" aria-labelledby="hhDataTitle">
+ <div class="hh-dialog-head">
+ <div>
+ <h2 id="hhDataTitle">Synthetic household data</h2>
+ <p>
+ All 1,000 stochastic household outcomes in the current scenario
+ <span class="hh-muted">Each row is one reproducible synthetic household decision; House ID follows the building on the map</span>
+ </p>
+ </div>
+ <button id="closeHouseholdData" class="hh-close" type="button" aria-label="Close household data">×</button>
+ </div>
+
+ <div class="hh-explainer">
+ <span><strong>Annual resources</strong> are modelled from country GNI and inequality</span>
+ <span><strong>Cash available</strong> = annual resources × upfront sanitation budget</span>
+ <span><strong>50% access price</strong> is the listed price at the midpoint of the scenario financial-access curve</span>
+ <span><strong>Decision</strong> is the strongest sanitation option realised by the economic scenario model</span>
+ </div>
+
+ <div class="hh-toolbar">
+ <label>
+ Search
+ <input id="hhSearch" type="search" placeholder="House ID or sanitation decision">
+ </label>
+ <label>
+ Quintile
+ <select id="hhQuintile">
+ <option value="all">All quintiles</option>
+ <option value="1">Q1 poorest</option>
+ <option value="2">Q2</option>
+ <option value="3">Q3</option>
+ <option value="4">Q4</option>
+ <option value="5">Q5 richest</option>
+ </select>
+ </label>
+ <label>
+ Decision
+ <select id="hhDecision">
+ <option value="all">All decisions</option>
+ <option value="none">No toilet / OD</option>
+ <option value="unimproved">Unimproved pit</option>
+ <option value="vip">VIP latrine</option>
+ <option value="septic">Septic</option>
+ </select>
+ </label>
+ <div class="hh-toolbar-actions">
+ <span id="hhRowCount">1,000 households</span>
+ 
+ </div>
+ </div>
+
+ <div class="hh-table-wrap">
+ <table class="hh-table" id="householdDataTable">
+ <thead>
+ <tr>
+ <th class="hh-sortable" data-hh-sort="houseId">House</th>
+ <th class="hh-sortable" data-hh-sort="wealthRank">Wealth rank</th>
+ <th class="hh-sortable" data-hh-sort="quintile">Quintile</th>
+ <th class="hh-sortable" data-hh-sort="annual">Annual HH resources <button class="info-tip" type="button" data-help="Synthetic annual household resources reconstructed from country GNI per capita and Gini inequality. These are model values, not observed household incomes.">i</button></th>
+ <th class="hh-sortable" data-hh-sort="budgetShare">Upfront budget</th>
+ <th class="hh-sortable" data-hh-sort="budget">Cash available <button class="info-tip" type="button" data-help="Annual household resources multiplied by the selected upfront sanitation budget percentage.">i</button></th>
+ <th class="hh-sortable" data-hh-sort="supportPct">Price support</th>
+ <th class="hh-sortable" data-hh-sort="maxListed">50% access price <button class="info-tip" type="button" data-help="Listed price at which this household sits at 50% modelled financial access after price support.">i</button></th>
+ <th class="hh-sortable" data-hh-sort="decision">Decision <button class="info-tip" type="button" data-help="The model assigns the strongest sanitation option that crosses the household’s scenario financial-access threshold. This produces a gradual population response around price rather than a cliff.">i</button></th>
+ <th class="hh-sortable" data-hh-sort="listedPrice">Listed price</th>
+ <th class="hh-sortable" data-hh-sort="householdPays">HH pays</th>
+ <th class="hh-sortable" data-hh-sort="supportValue">Support value <button class="info-tip" type="button" data-help="Value of price support applied to the selected sanitation option: listed price minus the amount paid by the household.">i</button></th>
+ <th class="hh-sortable" data-hh-sort="containment">Faecal load kept out</th>
+ <th>Financial access by option</th>
+ </tr>
+ </thead>
+ <tbody></tbody>
+ </table>
+ </div>
+
+ <div class="hh-dialog-foot">
+ <span>Synthetic data generated by the current scenario, not household survey observations</span>
+ <span>Values update when country, affordability, support or technology assumptions change</span>
+ </div>
+ </div>
+</div>
+
+<div id="tooltip" class="tooltip"></div>
+
+<footer>
+Demo community fixed at 1,000 households. The village layout is synthetic. The LDC comparison uses embedded World Bank country unit-cost benchmarks and current WHO/UNICEF JMP indicators distributed through WDI.
+</footer>
+
+<script src="app.js" defer></script>
+
+</body>
+</html>
