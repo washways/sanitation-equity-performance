@@ -1,4 +1,4 @@
-const WB="https://api.worldbank.org/";
+const WB="https://api.worldbank.org/v2";
 const N=1000;
 const HH_SIZE=4.5;
 const FECAL_WET_G_PER_PERSON_DAY=128; // Rose et al. 2015 global median wet faecal mass
@@ -207,13 +207,59 @@ function latest(p){
  ? p[1].find(d=>d&&d.value!==null&&d.value!==undefined)||null
  : null
 }
+
+function wbJsonp(path,params={},timeoutMs=15000){
+  return new Promise((resolve,reject)=>{
+    // World Bank officially supports JSONP using format=jsonP&prefix=...
+    // Keep callback lowercase because older API behaviour lowercased prefixes.
+    const cb=("wbcb_"+Date.now()+"_"+Math.floor(Math.random()*1e9)).toLowerCase();
+    const script=document.createElement("script");
+    let finished=false;
+
+    const cleanup=()=>{
+      if(finished)return;
+      finished=true;
+      clearTimeout(timer);
+      try{delete window[cb]}catch(e){window[cb]=undefined}
+      script.remove();
+    };
+
+    window[cb]=(data)=>{
+      cleanup();
+      resolve(data);
+    };
+
+    const qs=new URLSearchParams({
+      ...params,
+      format:"jsonP",
+      prefix:cb
+    });
+
+    script.src=`${WB}${path}?${qs.toString()}`;
+    script.async=true;
+    script.referrerPolicy="no-referrer";
+    script.onerror=()=>{
+      cleanup();
+      reject(new Error("World Bank JSONP request failed"));
+    };
+
+    const timer=setTimeout(()=>{
+      cleanup();
+      reject(new Error("World Bank request timed out"));
+    },timeoutMs);
+
+    document.head.appendChild(script);
+  });
+}
+
 async function indicator(iso,code,start=1990){
- const yr=new Date().getFullYear();
- const r=await fetch(`${WB}/country/${iso}/indicator/${code}?format=json&per_page=100&date=${start}:${yr}`);
+  const yr=new Date().getFullYear();
+  const j=await wbJsonp(
+    `/country/${iso}/indicator/${code}`,
+    {per_page:"100",date:`${start}:${yr}`}
+  );
 
- if(!r.ok)throw new Error("wb");
-
- return latest(await r.json())
+  return latest(j);
 }
 async function loadFX(){
  try{
@@ -224,19 +270,27 @@ async function loadFX(){
  }catch(e){}
 }
 async function loadCountries(){
- try{
- const r=await fetch(`${WB}/country?format=json&per_page=400`);
- const j=await r.json();
+  try{
+    const j=await wbJsonp("/country",{per_page:"400"});
 
- state.countries=(j[1]||[])
- .filter(c=>c.region?.id!=="NA"&&c.iso2Code?.length===2)
- .sort((a,b)=>a.name.localeCompare(b.name));
+    state.countries=(j[1]||[])
+      .filter(c=>c.region?.id!=="NA"&&c.iso2Code?.length===2)
+      .sort((a,b)=>a.name.localeCompare(b.name));
 
- el("country").innerHTML=
- state.countries.map(c=>`<option value="${c.id}" ${c.id==="MWI"?"selected":""}>${c.name}</option>`).join("")
- }catch(e){
- el("countryStatus").textContent="Country list unavailable. Malawi fallback retained."
- }
+    el("country").innerHTML=
+      state.countries.map(c=>`<option value="${c.id}" ${c.id==="MWI"?"selected":""}>${c.name}</option>`).join("");
+  }catch(e){
+    // Keep Malawi usable even if the country metadata request fails.
+    state.countries=[{
+      id:"MWI",
+      iso2Code:"MW",
+      name:"Malawi",
+      incomeLevel:{value:"Low income"}
+    }];
+
+    el("country").innerHTML='<option value="MWI" selected>Malawi</option>';
+    el("countryStatus").textContent="Country list could not be refreshed. Malawi fallback retained.";
+  }
 }
 function localCurrency(iso2){
  const hit=COUNTRY_CURRENCY[iso2];
@@ -1374,12 +1428,14 @@ function withTimeout(promise,ms=12000){
  });
 }
 async function ldcIndicator(code,dateRange){
- const codes=LDC_ISO.join(";");
- const url=`${WB}/country/${codes}/indicator/${code}?format=json&per_page=5000&date=${dateRange}`;
- const r=await withTimeout(fetch(url),12000);
- if(!r.ok)throw new Error(`World Bank request failed: ${code}`);
- const j=await r.json();
- return Array.isArray(j)&&Array.isArray(j[1])?j[1]:[];
+  const codes=LDC_ISO.join(";");
+  const j=await wbJsonp(
+    `/country/${codes}/indicator/${code}`,
+    {per_page:"5000",date:dateRange},
+    20000
+  );
+
+  return Array.isArray(j)&&Array.isArray(j[1])?j[1]:[];
 }
 function latestMap(rows){
  const out={};
@@ -2450,7 +2506,9 @@ function saveCachedLdcSnapshot(maps){
 async function loadGlobalData(){
  if(state.globalLoaded)return;
 
- el("globalStatus").textContent=
+ const status=el("globalStatus");
+ status.classList.add("is-loading");
+ status.textContent=
  "Loading five current WDI/JMP series for the 44 UN Least Developed Countries…";
 
  try{
@@ -2474,7 +2532,8 @@ async function loadGlobalData(){
  state.globalLoaded=true;
  saveCachedLdcSnapshot(maps);
 
- el("globalStatus").textContent=
+ status.classList.remove("is-loading");
+ status.textContent=
  `Loaded ${LDC_ISO.length} UN LDCs. Cost benchmarks are embedded from the World Bank 2016 study; economic and JMP indicators are current WDI/JMP data.`;
 
  updateGlobalComparison();
@@ -2482,8 +2541,9 @@ async function loadGlobalData(){
  }catch(err){
  console.error(err);
 
- el("globalStatus").textContent=
- "Could not load the current WDI/JMP indicators within 12 seconds. The page has stopped trying rather than hanging. Reopen it with an internet connection and try again.";
+ status.classList.remove("is-loading");
+ status.textContent=
+ "The World Bank/JMP data request failed. The rest of the tool remains available; try reloading this page to retry the LDC comparison.";
  }
 }
 

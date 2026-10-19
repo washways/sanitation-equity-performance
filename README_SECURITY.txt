@@ -50,3 +50,11 @@ Sanitation Affordability, Equity & Performance Explorer
 
 Favicon:
 favicon.svg with favicon.ico fallback.
+
+World Bank browser compatibility
+--------------------------------
+The World Bank Indicators API does not reliably expose CORS headers for direct
+browser fetch() calls. This publishing build uses the World Bank API's documented
+JSONP output (`format=jsonP&prefix=...`) for country metadata and indicator data.
+The API base is explicitly `/v2`, avoiding the redirect/double-slash requests
+that were visible in the earlier browser console.

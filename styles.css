@@ -7452,3 +7452,27 @@ button, a, select, input[type=range]{
  grid-template-columns:1fr;
  }
 }
+
+.global-status.is-loading{
+  position:relative;
+  padding-left:27px;
+}
+.global-status.is-loading::before{
+  content:"";
+  position:absolute;
+  left:8px;
+  top:50%;
+  width:10px;
+  height:10px;
+  margin-top:-6px;
+  border:2px solid #d6e0e5;
+  border-top-color:#4f7f94;
+  border-radius:50%;
+  animation:globalStatusSpin .75s linear infinite;
+}
+@keyframes globalStatusSpin{
+  to{transform:rotate(360deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .global-status.is-loading::before{animation:none}
+}
