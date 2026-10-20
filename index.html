@@ -13,7 +13,7 @@
  <link rel="alternate icon" href="favicon.ico">
 <title>Sanitation Affordability, Equity & Performance Explorer</title>
 <meta name="description" content="Interactive sanitation affordability, equity and community impact explorer.">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?build=20261020b">
 </head>
 <body>
  <div id="countryLoadingOverlay" class="country-loading-overlay" hidden aria-live="polite" aria-busy="true">
@@ -58,6 +58,11 @@
  </div>
  </div>
 </header>
+
+<div id="startupError" class="startup-error" hidden role="alert">
+  <strong>The explorer could not finish loading.</strong>
+  <span id="startupErrorText">Refresh the page. If the problem persists, the browser console will contain the technical error.</span>
+</div>
 
 <main class="landing page-view" id="landingPage">
  <section class="landing-hero">
@@ -1035,7 +1040,7 @@
 Demo community fixed at 1,000 households. The village layout is synthetic. The LDC comparison uses embedded World Bank country unit-cost benchmarks and current WHO/UNICEF JMP indicators distributed through WDI.
 </footer>
 
-<script src="app.js" defer></script>
+<script src="app.js?build=20261020b" defer></script>
 
 </body>
 </html>

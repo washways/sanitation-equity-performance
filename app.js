@@ -212,7 +212,7 @@ function latest(p){
 
 async function loadSnapshot(){
   try{
-    const r=await fetch("./data/snapshot.json",{cache:"no-store"});
+    const r=await fetch(`./data/snapshot.json?build=${Date.now()}`,{cache:"no-store"});
     if(!r.ok)throw new Error(`Snapshot HTTP ${r.status}`);
     state.snapshot=await r.json();
     if(state.snapshot?.fx)state.fx={USD:1,...state.snapshot.fx};
@@ -3625,25 +3625,47 @@ document.addEventListener("click",e=>{
  if(!e.target.closest(".info-tip"))hideHelpTooltip();
 });
 
+function routeFromHash(){
+  return location.hash==="#global"?"global":
+    location.hash==="#strategy"?"strategy":
+    location.hash==="#country"?"country":
+    "home";
+}
+
+function showStartupError(err){
+  console.error("Explorer startup failed",err);
+  const box=el("startupError");
+  if(box){
+    box.hidden=false;
+    const msg=el("startupErrorText");
+    if(msg)msg.textContent=`${err?.name||"Error"}: ${err?.message||String(err)}`;
+  }
+  setCountryLoading(false);
+}
+
 async function init(){
+  const route=routeFromHash();
+
+  // Make the requested page visible immediately. Data/rendering failures should
+  // degrade individual panels rather than leave the entire application blank.
+  showPage(route);
+
   renderSyntheticBase();
+  initJmpValidationControls();
+  updateCountryText();
+  syncOutputs();
+  applyCountryCostDefaults("MWI");
+  renderOptions();
+  render();
+
   await loadSnapshot();
   await Promise.all([loadFX(),loadCountries()]);
   await changeCountry("MWI");
 
-  const route=
-    location.hash==="#global"?"global":
-    location.hash==="#strategy"?"strategy":
-    location.hash==="#country"?"country":
-    "home";
+  // Re-apply the route after async setup in case any controls were rebuilt.
   showPage(route);
 }
 
-renderSyntheticBase();
-initJmpValidationControls();
-updateCountryText();
-syncOutputs();
-applyCountryCostDefaults("MWI");
-renderOptions();
-render();
-init();
+init().catch(showStartupError);
+
+window.addEventListener("hashchange",()=>showPage(routeFromHash()));

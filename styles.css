@@ -7476,3 +7476,15 @@ button, a, select, input[type=range]{
 @media(prefers-reduced-motion:reduce){
   .global-status.is-loading::before{animation:none}
 }
+
+.startup-error{
+  max-width:1500px;
+  margin:0 auto;
+  padding:10px 16px;
+  border-bottom:1px solid #e4c9c5;
+  background:#fff4f2;
+  color:#733b34;
+  font-size:11px;
+}
+.startup-error strong{display:block;margin-bottom:2px;color:#602e29}
+.startup-error[hidden]{display:none}
