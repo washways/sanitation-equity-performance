@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; frame-src 'none'; base-uri 'self';">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  <meta name="description" content="Explore how 1,000 stochastic household decisions connect affordability and inequality with sanitation cost, coverage and environmental performance.">
@@ -639,7 +640,7 @@
  </div>
  </div>
 
- <div id="globalStatus" class="global-status">The UN LDC list and World Bank country cost benchmarks are embedded. Current WDI/JMP indicators load from the World Bank Indicators API using its browser-compatible JSONP format.</div>
+ <div id="globalStatus" class="global-status">The UN LDC list and World Bank country cost benchmarks are embedded. Current WDI/JMP indicators are read from a pre-built same-origin data snapshot. Visitors' browsers do not call third-party data APIs.</div>
  </section>
 
  <section class="metric-summary-wrap">

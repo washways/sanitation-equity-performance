@@ -1,0 +1,2025 @@
+{
+  "generatedAt": null,
+  "status": "bootstrap",
+  "countries": [
+    {
+      "id": "AFG",
+      "iso2Code": "AF",
+      "name": "Afghanistan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ALB",
+      "iso2Code": "AL",
+      "name": "Albania",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "DZA",
+      "iso2Code": "DZ",
+      "name": "Algeria",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ASM",
+      "iso2Code": "AS",
+      "name": "American Samoa",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "AND",
+      "iso2Code": "AD",
+      "name": "Andorra",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "AGO",
+      "iso2Code": "AO",
+      "name": "Angola",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "AIA",
+      "iso2Code": "AI",
+      "name": "Anguilla",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ATA",
+      "iso2Code": "AQ",
+      "name": "Antarctica",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ATG",
+      "iso2Code": "AG",
+      "name": "Antigua and Barbuda",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ARG",
+      "iso2Code": "AR",
+      "name": "Argentina",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ARM",
+      "iso2Code": "AM",
+      "name": "Armenia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ABW",
+      "iso2Code": "AW",
+      "name": "Aruba",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "AUS",
+      "iso2Code": "AU",
+      "name": "Australia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "AUT",
+      "iso2Code": "AT",
+      "name": "Austria",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "AZE",
+      "iso2Code": "AZ",
+      "name": "Azerbaijan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BHS",
+      "iso2Code": "BS",
+      "name": "Bahamas",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BHR",
+      "iso2Code": "BH",
+      "name": "Bahrain",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BGD",
+      "iso2Code": "BD",
+      "name": "Bangladesh",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BRB",
+      "iso2Code": "BB",
+      "name": "Barbados",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BLR",
+      "iso2Code": "BY",
+      "name": "Belarus",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BEL",
+      "iso2Code": "BE",
+      "name": "Belgium",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BLZ",
+      "iso2Code": "BZ",
+      "name": "Belize",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BEN",
+      "iso2Code": "BJ",
+      "name": "Benin",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BMU",
+      "iso2Code": "BM",
+      "name": "Bermuda",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BTN",
+      "iso2Code": "BT",
+      "name": "Bhutan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BOL",
+      "iso2Code": "BO",
+      "name": "Bolivia, Plurinational State of",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BES",
+      "iso2Code": "BQ",
+      "name": "Bonaire, Sint Eustatius and Saba",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BIH",
+      "iso2Code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BWA",
+      "iso2Code": "BW",
+      "name": "Botswana",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BVT",
+      "iso2Code": "BV",
+      "name": "Bouvet Island",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BRA",
+      "iso2Code": "BR",
+      "name": "Brazil",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "IOT",
+      "iso2Code": "IO",
+      "name": "British Indian Ocean Territory",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BRN",
+      "iso2Code": "BN",
+      "name": "Brunei Darussalam",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BGR",
+      "iso2Code": "BG",
+      "name": "Bulgaria",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BFA",
+      "iso2Code": "BF",
+      "name": "Burkina Faso",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BDI",
+      "iso2Code": "BI",
+      "name": "Burundi",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CPV",
+      "iso2Code": "CV",
+      "name": "Cabo Verde",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "KHM",
+      "iso2Code": "KH",
+      "name": "Cambodia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CMR",
+      "iso2Code": "CM",
+      "name": "Cameroon",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CAN",
+      "iso2Code": "CA",
+      "name": "Canada",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CYM",
+      "iso2Code": "KY",
+      "name": "Cayman Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CAF",
+      "iso2Code": "CF",
+      "name": "Central African Republic",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TCD",
+      "iso2Code": "TD",
+      "name": "Chad",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CHL",
+      "iso2Code": "CL",
+      "name": "Chile",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CHN",
+      "iso2Code": "CN",
+      "name": "China",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CXR",
+      "iso2Code": "CX",
+      "name": "Christmas Island",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CCK",
+      "iso2Code": "CC",
+      "name": "Cocos (Keeling) Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "COL",
+      "iso2Code": "CO",
+      "name": "Colombia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "COM",
+      "iso2Code": "KM",
+      "name": "Comoros",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "COG",
+      "iso2Code": "CG",
+      "name": "Congo",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "COD",
+      "iso2Code": "CD",
+      "name": "Congo, The Democratic Republic of the",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "COK",
+      "iso2Code": "CK",
+      "name": "Cook Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CRI",
+      "iso2Code": "CR",
+      "name": "Costa Rica",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "HRV",
+      "iso2Code": "HR",
+      "name": "Croatia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CUB",
+      "iso2Code": "CU",
+      "name": "Cuba",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CUW",
+      "iso2Code": "CW",
+      "name": "Cura\u00e7ao",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CYP",
+      "iso2Code": "CY",
+      "name": "Cyprus",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CZE",
+      "iso2Code": "CZ",
+      "name": "Czechia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CIV",
+      "iso2Code": "CI",
+      "name": "C\u00f4te d'Ivoire",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "DNK",
+      "iso2Code": "DK",
+      "name": "Denmark",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "DJI",
+      "iso2Code": "DJ",
+      "name": "Djibouti",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "DMA",
+      "iso2Code": "DM",
+      "name": "Dominica",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "DOM",
+      "iso2Code": "DO",
+      "name": "Dominican Republic",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ECU",
+      "iso2Code": "EC",
+      "name": "Ecuador",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "EGY",
+      "iso2Code": "EG",
+      "name": "Egypt",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SLV",
+      "iso2Code": "SV",
+      "name": "El Salvador",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GNQ",
+      "iso2Code": "GQ",
+      "name": "Equatorial Guinea",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ERI",
+      "iso2Code": "ER",
+      "name": "Eritrea",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "EST",
+      "iso2Code": "EE",
+      "name": "Estonia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SWZ",
+      "iso2Code": "SZ",
+      "name": "Eswatini",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ETH",
+      "iso2Code": "ET",
+      "name": "Ethiopia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "FLK",
+      "iso2Code": "FK",
+      "name": "Falkland Islands (Malvinas)",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "FRO",
+      "iso2Code": "FO",
+      "name": "Faroe Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "FJI",
+      "iso2Code": "FJ",
+      "name": "Fiji",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "FIN",
+      "iso2Code": "FI",
+      "name": "Finland",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "FRA",
+      "iso2Code": "FR",
+      "name": "France",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GUF",
+      "iso2Code": "GF",
+      "name": "French Guiana",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PYF",
+      "iso2Code": "PF",
+      "name": "French Polynesia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ATF",
+      "iso2Code": "TF",
+      "name": "French Southern Territories",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GAB",
+      "iso2Code": "GA",
+      "name": "Gabon",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GMB",
+      "iso2Code": "GM",
+      "name": "Gambia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GEO",
+      "iso2Code": "GE",
+      "name": "Georgia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "DEU",
+      "iso2Code": "DE",
+      "name": "Germany",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GHA",
+      "iso2Code": "GH",
+      "name": "Ghana",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GIB",
+      "iso2Code": "GI",
+      "name": "Gibraltar",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GRC",
+      "iso2Code": "GR",
+      "name": "Greece",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GRL",
+      "iso2Code": "GL",
+      "name": "Greenland",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GRD",
+      "iso2Code": "GD",
+      "name": "Grenada",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GLP",
+      "iso2Code": "GP",
+      "name": "Guadeloupe",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GUM",
+      "iso2Code": "GU",
+      "name": "Guam",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GTM",
+      "iso2Code": "GT",
+      "name": "Guatemala",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GGY",
+      "iso2Code": "GG",
+      "name": "Guernsey",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GIN",
+      "iso2Code": "GN",
+      "name": "Guinea",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GNB",
+      "iso2Code": "GW",
+      "name": "Guinea-Bissau",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GUY",
+      "iso2Code": "GY",
+      "name": "Guyana",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "HTI",
+      "iso2Code": "HT",
+      "name": "Haiti",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "HMD",
+      "iso2Code": "HM",
+      "name": "Heard Island and McDonald Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "VAT",
+      "iso2Code": "VA",
+      "name": "Holy See (Vatican City State)",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "HND",
+      "iso2Code": "HN",
+      "name": "Honduras",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "HKG",
+      "iso2Code": "HK",
+      "name": "Hong Kong",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "HUN",
+      "iso2Code": "HU",
+      "name": "Hungary",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ISL",
+      "iso2Code": "IS",
+      "name": "Iceland",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "IND",
+      "iso2Code": "IN",
+      "name": "India",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "IDN",
+      "iso2Code": "ID",
+      "name": "Indonesia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "IRN",
+      "iso2Code": "IR",
+      "name": "Iran, Islamic Republic of",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "IRQ",
+      "iso2Code": "IQ",
+      "name": "Iraq",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "IRL",
+      "iso2Code": "IE",
+      "name": "Ireland",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "IMN",
+      "iso2Code": "IM",
+      "name": "Isle of Man",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ISR",
+      "iso2Code": "IL",
+      "name": "Israel",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ITA",
+      "iso2Code": "IT",
+      "name": "Italy",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "JAM",
+      "iso2Code": "JM",
+      "name": "Jamaica",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "JPN",
+      "iso2Code": "JP",
+      "name": "Japan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "JEY",
+      "iso2Code": "JE",
+      "name": "Jersey",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "JOR",
+      "iso2Code": "JO",
+      "name": "Jordan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "KAZ",
+      "iso2Code": "KZ",
+      "name": "Kazakhstan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "KEN",
+      "iso2Code": "KE",
+      "name": "Kenya",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "KIR",
+      "iso2Code": "KI",
+      "name": "Kiribati",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PRK",
+      "iso2Code": "KP",
+      "name": "Korea, Democratic People's Republic of",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "KOR",
+      "iso2Code": "KR",
+      "name": "Korea, Republic of",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "KWT",
+      "iso2Code": "KW",
+      "name": "Kuwait",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "KGZ",
+      "iso2Code": "KG",
+      "name": "Kyrgyzstan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LAO",
+      "iso2Code": "LA",
+      "name": "Lao People's Democratic Republic",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LVA",
+      "iso2Code": "LV",
+      "name": "Latvia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LBN",
+      "iso2Code": "LB",
+      "name": "Lebanon",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LSO",
+      "iso2Code": "LS",
+      "name": "Lesotho",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LBR",
+      "iso2Code": "LR",
+      "name": "Liberia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LBY",
+      "iso2Code": "LY",
+      "name": "Libya",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LIE",
+      "iso2Code": "LI",
+      "name": "Liechtenstein",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LTU",
+      "iso2Code": "LT",
+      "name": "Lithuania",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LUX",
+      "iso2Code": "LU",
+      "name": "Luxembourg",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MAC",
+      "iso2Code": "MO",
+      "name": "Macao",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MDG",
+      "iso2Code": "MG",
+      "name": "Madagascar",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MWI",
+      "iso2Code": "MW",
+      "name": "Malawi",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MYS",
+      "iso2Code": "MY",
+      "name": "Malaysia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MDV",
+      "iso2Code": "MV",
+      "name": "Maldives",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MLI",
+      "iso2Code": "ML",
+      "name": "Mali",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MLT",
+      "iso2Code": "MT",
+      "name": "Malta",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MHL",
+      "iso2Code": "MH",
+      "name": "Marshall Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MTQ",
+      "iso2Code": "MQ",
+      "name": "Martinique",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MRT",
+      "iso2Code": "MR",
+      "name": "Mauritania",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MUS",
+      "iso2Code": "MU",
+      "name": "Mauritius",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MYT",
+      "iso2Code": "YT",
+      "name": "Mayotte",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MEX",
+      "iso2Code": "MX",
+      "name": "Mexico",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "FSM",
+      "iso2Code": "FM",
+      "name": "Micronesia, Federated States of",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MDA",
+      "iso2Code": "MD",
+      "name": "Moldova, Republic of",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MCO",
+      "iso2Code": "MC",
+      "name": "Monaco",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MNG",
+      "iso2Code": "MN",
+      "name": "Mongolia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MNE",
+      "iso2Code": "ME",
+      "name": "Montenegro",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MSR",
+      "iso2Code": "MS",
+      "name": "Montserrat",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MAR",
+      "iso2Code": "MA",
+      "name": "Morocco",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MOZ",
+      "iso2Code": "MZ",
+      "name": "Mozambique",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MMR",
+      "iso2Code": "MM",
+      "name": "Myanmar",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NAM",
+      "iso2Code": "NA",
+      "name": "Namibia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NRU",
+      "iso2Code": "NR",
+      "name": "Nauru",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NPL",
+      "iso2Code": "NP",
+      "name": "Nepal",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NLD",
+      "iso2Code": "NL",
+      "name": "Netherlands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NCL",
+      "iso2Code": "NC",
+      "name": "New Caledonia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NZL",
+      "iso2Code": "NZ",
+      "name": "New Zealand",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NIC",
+      "iso2Code": "NI",
+      "name": "Nicaragua",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NER",
+      "iso2Code": "NE",
+      "name": "Niger",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NGA",
+      "iso2Code": "NG",
+      "name": "Nigeria",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NIU",
+      "iso2Code": "NU",
+      "name": "Niue",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NFK",
+      "iso2Code": "NF",
+      "name": "Norfolk Island",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MKD",
+      "iso2Code": "MK",
+      "name": "North Macedonia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MNP",
+      "iso2Code": "MP",
+      "name": "Northern Mariana Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "NOR",
+      "iso2Code": "NO",
+      "name": "Norway",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "OMN",
+      "iso2Code": "OM",
+      "name": "Oman",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PAK",
+      "iso2Code": "PK",
+      "name": "Pakistan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PLW",
+      "iso2Code": "PW",
+      "name": "Palau",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PSE",
+      "iso2Code": "PS",
+      "name": "Palestine, State of",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PAN",
+      "iso2Code": "PA",
+      "name": "Panama",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PNG",
+      "iso2Code": "PG",
+      "name": "Papua New Guinea",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PRY",
+      "iso2Code": "PY",
+      "name": "Paraguay",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PER",
+      "iso2Code": "PE",
+      "name": "Peru",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PHL",
+      "iso2Code": "PH",
+      "name": "Philippines",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PCN",
+      "iso2Code": "PN",
+      "name": "Pitcairn",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "POL",
+      "iso2Code": "PL",
+      "name": "Poland",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PRT",
+      "iso2Code": "PT",
+      "name": "Portugal",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "PRI",
+      "iso2Code": "PR",
+      "name": "Puerto Rico",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "QAT",
+      "iso2Code": "QA",
+      "name": "Qatar",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ROU",
+      "iso2Code": "RO",
+      "name": "Romania",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "RUS",
+      "iso2Code": "RU",
+      "name": "Russian Federation",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "RWA",
+      "iso2Code": "RW",
+      "name": "Rwanda",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "REU",
+      "iso2Code": "RE",
+      "name": "R\u00e9union",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "BLM",
+      "iso2Code": "BL",
+      "name": "Saint Barth\u00e9lemy",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SHN",
+      "iso2Code": "SH",
+      "name": "Saint Helena, Ascension and Tristan da Cunha",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "KNA",
+      "iso2Code": "KN",
+      "name": "Saint Kitts and Nevis",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LCA",
+      "iso2Code": "LC",
+      "name": "Saint Lucia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "MAF",
+      "iso2Code": "MF",
+      "name": "Saint Martin (French part)",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SPM",
+      "iso2Code": "PM",
+      "name": "Saint Pierre and Miquelon",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "VCT",
+      "iso2Code": "VC",
+      "name": "Saint Vincent and the Grenadines",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "WSM",
+      "iso2Code": "WS",
+      "name": "Samoa",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SMR",
+      "iso2Code": "SM",
+      "name": "San Marino",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "STP",
+      "iso2Code": "ST",
+      "name": "Sao Tome and Principe",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SAU",
+      "iso2Code": "SA",
+      "name": "Saudi Arabia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SEN",
+      "iso2Code": "SN",
+      "name": "Senegal",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SRB",
+      "iso2Code": "RS",
+      "name": "Serbia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SYC",
+      "iso2Code": "SC",
+      "name": "Seychelles",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SLE",
+      "iso2Code": "SL",
+      "name": "Sierra Leone",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SGP",
+      "iso2Code": "SG",
+      "name": "Singapore",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SXM",
+      "iso2Code": "SX",
+      "name": "Sint Maarten (Dutch part)",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SVK",
+      "iso2Code": "SK",
+      "name": "Slovakia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SVN",
+      "iso2Code": "SI",
+      "name": "Slovenia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SLB",
+      "iso2Code": "SB",
+      "name": "Solomon Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SOM",
+      "iso2Code": "SO",
+      "name": "Somalia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ZAF",
+      "iso2Code": "ZA",
+      "name": "South Africa",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SGS",
+      "iso2Code": "GS",
+      "name": "South Georgia and the South Sandwich Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SSD",
+      "iso2Code": "SS",
+      "name": "South Sudan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ESP",
+      "iso2Code": "ES",
+      "name": "Spain",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "LKA",
+      "iso2Code": "LK",
+      "name": "Sri Lanka",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SDN",
+      "iso2Code": "SD",
+      "name": "Sudan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SUR",
+      "iso2Code": "SR",
+      "name": "Suriname",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SJM",
+      "iso2Code": "SJ",
+      "name": "Svalbard and Jan Mayen",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SWE",
+      "iso2Code": "SE",
+      "name": "Sweden",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "CHE",
+      "iso2Code": "CH",
+      "name": "Switzerland",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "SYR",
+      "iso2Code": "SY",
+      "name": "Syrian Arab Republic",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TWN",
+      "iso2Code": "TW",
+      "name": "Taiwan, Province of China",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TJK",
+      "iso2Code": "TJ",
+      "name": "Tajikistan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TZA",
+      "iso2Code": "TZ",
+      "name": "Tanzania, United Republic of",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "THA",
+      "iso2Code": "TH",
+      "name": "Thailand",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TLS",
+      "iso2Code": "TL",
+      "name": "Timor-Leste",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TGO",
+      "iso2Code": "TG",
+      "name": "Togo",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TKL",
+      "iso2Code": "TK",
+      "name": "Tokelau",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TON",
+      "iso2Code": "TO",
+      "name": "Tonga",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TTO",
+      "iso2Code": "TT",
+      "name": "Trinidad and Tobago",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TUN",
+      "iso2Code": "TN",
+      "name": "Tunisia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TKM",
+      "iso2Code": "TM",
+      "name": "Turkmenistan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TCA",
+      "iso2Code": "TC",
+      "name": "Turks and Caicos Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TUV",
+      "iso2Code": "TV",
+      "name": "Tuvalu",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "TUR",
+      "iso2Code": "TR",
+      "name": "T\u00fcrkiye",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "UGA",
+      "iso2Code": "UG",
+      "name": "Uganda",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "UKR",
+      "iso2Code": "UA",
+      "name": "Ukraine",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ARE",
+      "iso2Code": "AE",
+      "name": "United Arab Emirates",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "GBR",
+      "iso2Code": "GB",
+      "name": "United Kingdom",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "USA",
+      "iso2Code": "US",
+      "name": "United States",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "UMI",
+      "iso2Code": "UM",
+      "name": "United States Minor Outlying Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "URY",
+      "iso2Code": "UY",
+      "name": "Uruguay",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "UZB",
+      "iso2Code": "UZ",
+      "name": "Uzbekistan",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "VUT",
+      "iso2Code": "VU",
+      "name": "Vanuatu",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "VEN",
+      "iso2Code": "VE",
+      "name": "Venezuela, Bolivarian Republic of",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "VNM",
+      "iso2Code": "VN",
+      "name": "Viet Nam",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "VGB",
+      "iso2Code": "VG",
+      "name": "Virgin Islands, British",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "VIR",
+      "iso2Code": "VI",
+      "name": "Virgin Islands, U.S.",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "WLF",
+      "iso2Code": "WF",
+      "name": "Wallis and Futuna",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ESH",
+      "iso2Code": "EH",
+      "name": "Western Sahara",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "YEM",
+      "iso2Code": "YE",
+      "name": "Yemen",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ZMB",
+      "iso2Code": "ZM",
+      "name": "Zambia",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ZWE",
+      "iso2Code": "ZW",
+      "name": "Zimbabwe",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    },
+    {
+      "id": "ALA",
+      "iso2Code": "AX",
+      "name": "\u00c5land Islands",
+      "incomeLevel": {
+        "value": "Not classified"
+      }
+    }
+  ],
+  "countryIndicators": {
+    "MWI": {
+      "gni": {
+        "value": 600,
+        "year": null
+      },
+      "gdp": {
+        "value": 670,
+        "year": null
+      },
+      "gini": {
+        "value": 38.5,
+        "year": 2019
+      }
+    }
+  },
+  "global": {
+    "gni": {},
+    "gdp": {},
+    "gini": {},
+    "basic": {},
+    "od": {}
+  },
+  "fx": {
+    "USD": 1,
+    "MWK": 1735
+  }
+}

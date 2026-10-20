@@ -58,3 +58,18 @@ browser fetch() calls. This publishing build uses the World Bank API's documente
 JSONP output (`format=jsonP&prefix=...`) for country metadata and indicator data.
 The API base is explicitly `/v2`, avoiding the redirect/double-slash requests
 that were visible in the earlier browser console.
+
+Browser API compatibility
+-------------------------
+The open exchange-rate request now uses the documented endpoint:
+https://open.er-api.com/v6/latest/USD
+
+World Bank JSONP callbacks now use simple alphanumeric callback names and
+`format=jsonp`. Global indicator queries request `country/all` and filter the
+44 LDCs locally, avoiding long semicolon-delimited country paths. WDI indicator
+calls explicitly use source 2.
+
+If live World Bank data are unavailable, the LDC page still renders the embedded
+World Bank sanitation-cost distribution and independent JMP inequality benchmark.
+
+Published runtime now reads only ./data/snapshot.json. Third-party API requests occur only in scripts/update_snapshot.py during an explicit data refresh.

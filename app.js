@@ -1,4 +1,3 @@
-const WB="https://api.worldbank.org/v2";
 const N=1000;
 const HH_SIZE=4.5;
 const FECAL_WET_G_PER_PERSON_DAY=128; // Rose et al. 2015 global median wet faecal mass
@@ -120,6 +119,7 @@ const state={
  countries:[],
  currency:"USD",
  fx:{USD:1,MWK:1735},
+ snapshot:null,
  options:OPTIONS.map(o=>({...o})),
  globalRaw:null,
  globalRows:[],
@@ -208,89 +208,35 @@ function latest(p){
  : null
 }
 
-function wbJsonp(path,params={},timeoutMs=15000){
-  return new Promise((resolve,reject)=>{
-    // World Bank officially supports JSONP using format=jsonP&prefix=...
-    // Keep callback lowercase because older API behaviour lowercased prefixes.
-    const cb=("wbcb_"+Date.now()+"_"+Math.floor(Math.random()*1e9)).toLowerCase();
-    const script=document.createElement("script");
-    let finished=false;
 
-    const cleanup=()=>{
-      if(finished)return;
-      finished=true;
-      clearTimeout(timer);
-      try{delete window[cb]}catch(e){window[cb]=undefined}
-      script.remove();
-    };
 
-    window[cb]=(data)=>{
-      cleanup();
-      resolve(data);
-    };
-
-    const qs=new URLSearchParams({
-      ...params,
-      format:"jsonP",
-      prefix:cb
-    });
-
-    script.src=`${WB}${path}?${qs.toString()}`;
-    script.async=true;
-    script.referrerPolicy="no-referrer";
-    script.onerror=()=>{
-      cleanup();
-      reject(new Error("World Bank JSONP request failed"));
-    };
-
-    const timer=setTimeout(()=>{
-      cleanup();
-      reject(new Error("World Bank request timed out"));
-    },timeoutMs);
-
-    document.head.appendChild(script);
-  });
+async function loadSnapshot(){
+  try{
+    const r=await fetch("./data/snapshot.json",{cache:"no-store"});
+    if(!r.ok)throw new Error(`Snapshot HTTP ${r.status}`);
+    state.snapshot=await r.json();
+    if(state.snapshot?.fx)state.fx={USD:1,...state.snapshot.fx};
+  }catch(err){
+    console.error("Static snapshot could not be loaded",err);
+    state.snapshot=null;
+  }
 }
 
 async function indicator(iso,code,start=1990){
-  const yr=new Date().getFullYear();
-  const j=await wbJsonp(
-    `/country/${iso}/indicator/${code}`,
-    {per_page:"100",date:`${start}:${yr}`}
-  );
-
-  return latest(j);
+  const key={"NY.GNP.PCAP.CD":"gni","NY.GDP.PCAP.CD":"gdp","SI.POV.GINI":"gini"}[code];
+  const hit=key?state.snapshot?.countryIndicators?.[iso]?.[key]:null;
+  return hit&&hit.value!==null&&hit.value!==undefined
+    ? {value:Number(hit.value),date:hit.year}
+    : null;
 }
 async function loadFX(){
- try{
- const r=await fetch("https://open.er-api.com//latest/USD");
- const j=await r.json();
-
- if(j?.rates)state.fx=j.rates
- }catch(e){}
+  if(state.snapshot?.fx)state.fx={USD:1,...state.snapshot.fx};
 }
 async function loadCountries(){
-  try{
-    const j=await wbJsonp("/country",{per_page:"400"});
-
-    state.countries=(j[1]||[])
-      .filter(c=>c.region?.id!=="NA"&&c.iso2Code?.length===2)
-      .sort((a,b)=>a.name.localeCompare(b.name));
-
-    el("country").innerHTML=
-      state.countries.map(c=>`<option value="${c.id}" ${c.id==="MWI"?"selected":""}>${c.name}</option>`).join("");
-  }catch(e){
-    // Keep Malawi usable even if the country metadata request fails.
-    state.countries=[{
-      id:"MWI",
-      iso2Code:"MW",
-      name:"Malawi",
-      incomeLevel:{value:"Low income"}
-    }];
-
-    el("country").innerHTML='<option value="MWI" selected>Malawi</option>';
-    el("countryStatus").textContent="Country list could not be refreshed. Malawi fallback retained.";
-  }
+  const rows=Array.isArray(state.snapshot?.countries)?state.snapshot.countries:[];
+  state.countries=rows.length?rows:[{id:"MWI",iso2Code:"MW",name:"Malawi",incomeLevel:{value:"Low income"}}];
+  state.countries.sort((a,b)=>a.name.localeCompare(b.name));
+  el("country").innerHTML=state.countries.map(c=>`<option value="${c.id}" ${c.id==="MWI"?"selected":""}>${c.name}</option>`).join("");
 }
 function localCurrency(iso2){
  const hit=COUNTRY_CURRENCY[iso2];
@@ -325,85 +271,51 @@ function setCountryLoading(active,title="Loading country data",detail="Retrievin
 }
 
 async function changeCountry(iso){
- const meta=state.countries.find(c=>c.id===iso);
- const countryName=meta?.name||iso;
+  const meta=state.countries.find(c=>c.id===iso);
+  const name=meta?.name||iso;
+  const snap=state.snapshot?.countryIndicators?.[iso]||{};
+  setCountryLoading(true,`Loading ${name}`,"Reading the pre-built data snapshot…");
 
- setCountryLoading(
- true,
- `Loading ${countryName}`,
- "Retrieving World Bank income and inequality data…"
- );
+  const c={
+    iso3:iso,
+    iso2:meta?.iso2Code||"MW",
+    name,
+    income:meta?.incomeLevel?.value||"Not classified",
+    gni:snap.gni||{value:null,year:null},
+    gdp:snap.gdp||{value:null,year:null},
+    gini:snap.gini||{value:null,year:null},
+    currency:localCurrency(meta?.iso2Code||"MW")
+  };
 
- el("countryStatus").textContent=`Loading ${countryName}…`;
+  if(iso==="MWI"){
+    if(!Number.isFinite(c.gni?.value))c.gni=structuredClone(FALLBACK.gni);
+    if(!Number.isFinite(c.gdp?.value))c.gdp=structuredClone(FALLBACK.gdp);
+    if(!Number.isFinite(c.gini?.value))c.gini=structuredClone(FALLBACK.gini);
+  }
 
- const c={
- iso3:iso,
- iso2:meta?.iso2Code||"MW",
- name:countryName,
- income:meta?.incomeLevel?.value||"Not classified",
- gni:{value:null,year:null},
- gdp:{value:null,year:null},
- gini:{value:null,year:null},
- currency:{code:"USD",name:"US dollar"}
- };
+  state.country=c;
+  rebuildCurrencies(c.currency);
 
- try{
- // Do not let one missing indicator make the whole country switch fail.
- const results=await Promise.allSettled([
- indicator(iso,"NY.GNP.PCAP.CD",2005),
- indicator(iso,"NY.GDP.PCAP.CD",2005),
- indicator(iso,"SI.POV.GINI",1990)
- ]);
+  const n=[c.gni?.value,c.gdp?.value,c.gini?.value].filter(Number.isFinite).length;
+  el("countryStatus").textContent=n===3
+    ? `Pre-built socioeconomic snapshot loaded for ${name}.`
+    : n>0
+      ? `Country loaded. Some socioeconomic indicators are unavailable in the snapshot.`
+      : `Country selected, but this snapshot has no usable GNI/GDP/Gini values for ${name}.`;
 
- const [gniR,gdpR,giniR]=results;
- const gni=gniR.status==="fulfilled"?gniR.value:null;
- const gdp=gdpR.status==="fulfilled"?gdpR.value:null;
- const gini=giniR.status==="fulfilled"?giniR.value:null;
+  updateCountryText();
+  applyCountryCostDefaults(iso);
+  state.strategy.initialized=false;
+  renderOptions();
 
- c.gni=gni?{value:gni.value,year:gni.date}:c.gni;
- c.gdp=gdp?{value:gdp.value,year:gdp.date}:c.gdp;
- c.gini=gini?{value:gini.value,year:gini.date}:c.gini;
- c.currency=localCurrency(c.iso2);
+  if(state.costSource?.type==="wb"){
+    el("countryStatus").textContent += " Sanitation cost defaults use the embedded World Bank country benchmark.";
+  }else{
+    el("countryStatus").textContent += " No embedded country sanitation cost benchmark is available, so editable scenario defaults are shown.";
+  }
 
- state.country=c;
- rebuildCurrencies(c.currency);
-
- const loaded=[c.gni.value,c.gdp.value,c.gini.value].filter(v=>v!=null).length;
-
- if(loaded===3){
- el("countryStatus").textContent="Latest available World Bank socioeconomic values loaded.";
- }else if(loaded>0){
- el("countryStatus").textContent="Country loaded. Some World Bank indicators are unavailable, so the model uses its stated fallbacks where needed.";
- }else{
- el("countryStatus").textContent="Country loaded, but current World Bank socioeconomic indicators could not be retrieved.";
- }
- }catch(e){
- state.country=iso==="MWI"?structuredClone(FALLBACK):c;
- state.country.currency=localCurrency(state.country.iso2);
- rebuildCurrencies(state.country.currency);
-
- el("countryStatus").textContent=
- iso==="MWI"
- ? "Using Malawi fallback values."
- : "Country selected, but socioeconomic indicators could not be loaded.";
- }
-
- updateCountryText();
- applyCountryCostDefaults(iso);
- state.strategy.initialized=false;
- renderOptions();
-
- if(state.costSource?.type==="wb"){
- el("countryStatus").textContent += " Sanitation cost defaults use the embedded World Bank country benchmark.";
- }else{
- el("countryStatus").textContent += " No embedded country sanitation cost benchmark is available, so editable scenario defaults are shown.";
- }
-
- render();
-
- // Keep the overlay visible very briefly so the state change is legible
- // rather than flashing too quickly on fast connections.
- setTimeout(()=>setCountryLoading(false),120);
+  render();
+  setTimeout(()=>setCountryLoading(false),80);
 }
 function updateCountryText(){
  el("countryFlag").textContent=flagEmoji(state.country.iso2);
@@ -1428,14 +1340,17 @@ function withTimeout(promise,ms=12000){
  });
 }
 async function ldcIndicator(code,dateRange){
-  const codes=LDC_ISO.join(";");
-  const j=await wbJsonp(
-    `/country/${codes}/indicator/${code}`,
-    {per_page:"5000",date:dateRange},
-    20000
-  );
-
-  return Array.isArray(j)&&Array.isArray(j[1])?j[1]:[];
+  const key={
+    "NY.GNP.PCAP.CD":"gni",
+    "NY.GDP.PCAP.CD":"gdp",
+    "SI.POV.GINI":"gini",
+    "SH.STA.ODFC.ZS":"od",
+    "SH.STA.BASS.ZS":"basic"
+  }[code];
+  const map=key?state.snapshot?.global?.[key]||{}:{};
+  return Object.entries(map).map(([iso,v])=>({
+    countryiso3code:iso,value:v?.value,date:String(v?.year??"")
+  }));
 }
 function latestMap(rows){
  const out={};
@@ -2504,47 +2419,27 @@ function saveCachedLdcSnapshot(maps){
  return;
 }
 async function loadGlobalData(){
- if(state.globalLoaded)return;
+  if(state.globalLoaded)return;
+  const status=el("globalStatus");
+  status.classList.remove("is-loading");
 
- const status=el("globalStatus");
- status.classList.add("is-loading");
- status.textContent=
- "Loading five current WDI/JMP series for the 44 UN Least Developed Countries…";
+  const maps=state.snapshot?.global||{gni:{},gdp:{},gini:{},od:{},basic:{}};
+  state.globalRaw={
+    gni:maps.gni||{},gdp:maps.gdp||{},gini:maps.gini||{},
+    od:maps.od||{},basic:maps.basic||{}
+  };
 
- try{
- const [gniRows,gdpRows,giniRows,odRows,basicRows]=await Promise.all([
- ldcIndicator("NY.GNP.PCAP.CD","2022:2024"),
- ldcIndicator("NY.GDP.PCAP.CD","2022:2024"),
- ldcIndicator("SI.POV.GINI","2000:2024"),
- ldcIndicator("SH.STA.ODFC.ZS","2024"),
- ldcIndicator("SH.STA.BASS.ZS","2024")
- ]);
-
- const maps={
- gni:latestMap(gniRows),
- gdp:latestMap(gdpRows),
- gini:latestMap(giniRows),
- od:latestMap(odRows),
- basic:latestMap(basicRows)
- };
-
- state.globalRaw=maps;
- state.globalLoaded=true;
- saveCachedLdcSnapshot(maps);
-
- status.classList.remove("is-loading");
- status.textContent=
- `Loaded ${LDC_ISO.length} UN LDCs. Cost benchmarks are embedded from the World Bank 2016 study; economic and JMP indicators are current WDI/JMP data.`;
-
- updateGlobalComparison();
-
- }catch(err){
- console.error(err);
-
- status.classList.remove("is-loading");
- status.textContent=
- "The World Bank/JMP data request failed. The rest of the tool remains available; try reloading this page to retry the LDC comparison.";
- }
+  const n=Object.values(state.globalRaw).reduce((s,m)=>s+Object.keys(m).length,0);
+  if(n){
+    state.globalLoaded=true;
+    const when=state.snapshot?.generatedAt?new Date(state.snapshot.generatedAt).toLocaleDateString():"the bundled snapshot";
+    status.textContent=`Using pre-built WDI/JMP snapshot from ${when}. No third-party API calls are made by your browser.`;
+    updateGlobalComparison();
+  }else{
+    status.textContent="The bootstrap snapshot does not yet contain national WDI/JMP series. Embedded sanitation-cost analysis and the independent JMP inequality benchmark remain available. Run the included snapshot updater once to populate the full comparison.";
+    try{renderTechnologyCostChart()}catch(e){}
+    try{renderJmpValidation()}catch(e){}
+  }
 }
 
 function showPage(page){
@@ -3731,20 +3626,17 @@ document.addEventListener("click",e=>{
 });
 
 async function init(){
- renderSyntheticBase();
+  renderSyntheticBase();
+  await loadSnapshot();
+  await Promise.all([loadFX(),loadCountries()]);
+  await changeCountry("MWI");
 
- await Promise.all([
- loadFX(),
- loadCountries()
- ]);
-
- await changeCountry("MWI");
- const route=
- location.hash==="#global"?"global":
- location.hash==="#strategy"?"strategy":
- location.hash==="#country"?"country":
- "home";
- showPage(route)
+  const route=
+    location.hash==="#global"?"global":
+    location.hash==="#strategy"?"strategy":
+    location.hash==="#country"?"country":
+    "home";
+  showPage(route);
 }
 
 renderSyntheticBase();
