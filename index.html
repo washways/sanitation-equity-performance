@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; frame-src 'none'; base-uri 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://washways.org https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com; img-src 'self' data: https://*.google-analytics.com https://www.googletagmanager.com; object-src 'none'; frame-src 'none'; base-uri 'self';">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
  <meta name="description" content="Explore how 1,000 stochastic household decisions connect affordability and inequality with sanitation cost, coverage and environmental performance.">
@@ -12,14 +12,16 @@
  <link rel="icon" href="favicon.svg" type="image/svg+xml">
  <link rel="alternate icon" href="favicon.ico">
 <title>Sanitation Affordability, Equity & Performance Explorer</title>
-<meta name="description" content="Interactive sanitation affordability, equity and community impact explorer.">
 <link rel="stylesheet" href="styles.css?build=20261020b">
   <meta property="og:image" content="https://washways.org/assets/images/tools/sanitation-equity-performance-preview.jpg">
   <meta name="twitter:image" content="https://washways.org/assets/images/tools/sanitation-equity-performance-preview.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <!-- Added by Washways Manager -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-64GCB9QDB5"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-64GCB9QDB5');</script>
+  <meta name="twitter:title" content="Sanitation Affordability, Equity & Performance Explorer">
+  <meta name="twitter:description" content="A 1,000-household stochastic scenario tool for sanitation affordability, equity, coverage and environmental performance.">
+  <meta property="og:site_name" content="WASHways">
+  <meta property="og:url" content="https://washways.org/sanitation-equity-performance/">
+  <link rel="canonical" href="https://washways.org/sanitation-equity-performance/">
+  <script src="https://washways.org/assets/js/washways-analytics.js" async></script>
 </head>
 <body>
  <div id="countryLoadingOverlay" class="country-loading-overlay" hidden aria-live="polite" aria-busy="true">
